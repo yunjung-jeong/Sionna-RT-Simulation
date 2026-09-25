@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Drone ISAC Digital Twin · Yunjung Jeong</title>
+  <meta name="description" content="Ongoing research: a ray-traced digital twin for sensing drones with communication signals. All results shown are simulated.">
+  <meta name="author" content="Yunjung Jeong">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111519" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://yunjung-jeong.github.io/Sionna-RT-Simulation/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Sensing Drones with Communication Signals">
+  <meta property="og:description" content="Ongoing research by Yunjung Jeong: a ray-traced digital twin of how one radio could detect a hovering drone and its spinning blades. All results shown are simulated.">
+  <meta property="og:url" content="https://yunjung-jeong.github.io/Sionna-RT-Simulation/">
+  <meta property="og:image" content="https://yunjung-jeong.github.io/Sionna-RT-Simulation/images/00_overview.png">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="530">
+  <meta property="og:image:alt" content="Simulated scene of a drone and a radio, the range-Doppler map of the drone's echo, and a micro-Doppler spectrogram with evenly spaced blade-flash lines.">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container">
+      <p class="eyebrow">Research project · in progress</p>
+      <h1>Sensing Drones with Communication Signals</h1>
+      <p class="subtitle">A ray-traced digital twin of how one radio could detect a hovering drone and its spinning blades.</p>
+      <p class="byline">
+        <span class="author">Yunjung Jeong</span><br>
+        <span class="affiliation">Intelligent Radio Sensing Lab (IRS Lab), Department of Electrical Engineering and Computer Science, DGIST</span>
+      </p>
+      <div class="header-actions">
+        <a class="button" href="https://yunjung-jeong.github.io/cv/">CV</a>
+        <a class="button button-outline" href="https://github.com/yunjung-jeong">GitHub</a>
+        <span class="chip">Ongoing, unpublished research</span>
+        <span class="chip">Simulation results</span>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+
+    <section id="glance" class="glance" aria-labelledby="glance-title">
+      <figure class="wide hero">
+        <a class="frame" href="images/00_overview.png" title="Open the full-size image">
+          <picture>
+            <source media="(max-width: 40rem)" srcset="images/00_overview_narrow.png" width="900" height="1390">
+            <img src="images/00_overview.png" width="1600" height="530" decoding="async" fetchpriority="high"
+                 alt="Three panels. First, a rendered outdoor scene: a blue marker labelled drone hovers in the sky on the left, a pink marker labelled radio sits just above the grey ground on the right, a dashed line of sight joins them, and an inset shows the quadcopter model. Second, a range-Doppler heat map in which the drone appears as bright horizontal bands at short range. Third, a spectrogram of Doppler over time with many evenly spaced horizontal lines above and below zero.">
+          </picture>
+        </a>
+        <figcaption><span class="takeaway">From scene to signature, all in simulation.</span> (1) The ray-traced scene: a radio mounted low and a hovering quadcopter. (2) The range-Doppler map that the sensing receiver makes from the echoes; the drone shows up as bands at its range. (3) Doppler over time at the drone’s range: evenly spaced blade-flash lines from the spinning rotors. Brighter colours mean stronger echoes.</figcaption>
+      </figure>
+
+      <h2 id="glance-title" class="glance-title">At a glance</h2>
+      <ul class="glance-list">
+        <li>I built a ray-traced digital twin of a hovering drone as seen by one communication radio.</li>
+        <li>In simulation, it reproduces the blade-flash signature of the spinning rotors, and a detector tells drone present from drone absent.</li>
+        <li>Checks on the simulator itself found a missing-path artifact and a dependence on the solver’s random seed before any map was trusted.</li>
+      </ul>
+    </section>
+
+    <nav class="toc" aria-label="On this page">
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#approach">How it works</a></li>
+        <li><a href="#scene">Scene</a></li>
+        <li><a href="#maps">Maps</a></li>
+        <li><a href="#checks">Simulator checks</a></li>
+        <li><a href="#next">Next steps</a></li>
+        <li><a href="#status">Status</a></li>
+      </ul>
+    </nav>
+
+    <section id="overview" aria-labelledby="overview-title">
+      <h2 id="overview-title">What I am working on</h2>
+      <p>Small drones are hard to see by radio. They return weak echoes, fly low, and hover near the ground and buildings, which echo more strongly than the drone itself. Meanwhile, wireless networks are being designed to sense as well as communicate. In <em>integrated sensing and communication</em> (ISAC), a signal sent to carry data also works as a radar signal.</p>
+      <p>I am studying whether a single software-defined radio can detect a drone and pick up the signature of its spinning blades. The radio would send a 5G-NR-like signal and listen to its own echoes. To understand what it should see, I am building a <em>digital twin</em>: a simulation detailed enough to predict those echoes, and open enough to show where it might mislead.</p>
+    </section>
+
+    <section id="approach" aria-labelledby="approach-title">
+      <h2 id="approach-title">How the twin works</h2>
+      <p>The twin is a chain of steps, and each one can be inspected on its own.</p>
+      <ol class="steps">
+        <li><strong>Scene.</strong> A 3-D outdoor scene: the radio, the ground, optional walls, and a quadcopter model whose blades turn over time.</li>
+        <li><strong>Ray tracing.</strong> NVIDIA Sionna RT traces the paths from the radio to the drone and back, including bounces off the ground.</li>
+        <li><strong>Waveform.</strong> The paths are applied to an OFDM signal (the multi-carrier waveform used in 4G and 5G) that carries known data.</li>
+        <li><strong>Sensing receiver.</strong> It compares the echoes with what was sent, removes echoes that stay constant, and turns delay into range and phase change into Doppler (speed toward or away from the radio).</li>
+        <li><strong>Maps.</strong> Range-Doppler maps, micro-Doppler spectrograms (Doppler over time) and detection maps.</li>
+      </ol>
+    </section>
+
+    <section id="scene" aria-labelledby="scene-title">
+      <h2 id="scene-title">The scene</h2>
+      <p>Most results below come from one scene: a radio mounted low above flat ground, aimed at a quadcopter hovering a short distance away and higher up.</p>
+
+      <figure class="wide">
+        <a class="frame" href="images/01_scene_short_range.png" title="Open the full-size image">
+          <img src="images/01_scene_short_range.png" width="1600" height="737" loading="lazy" decoding="async"
+               alt="Side-view diagram of a simulated outdoor scene: a pink dot labelled radio sits just above a grey ground plane on the right, a blue dot labelled drone hovers higher up on the left, a dashed line of sight joins them with the elevation angle marked, and an inset box shows a rendered quadcopter model.">
+        </a>
+        <figcaption><span class="fig-num">Figure 1.</span> <span class="takeaway">The radio hears the drone, and also its own reflection off the ground just below it.</span> The main scene in the digital twin: a quadcopter hovering above flat ground, a short distance from a radio mounted low. A second version removes the ground (open sky), so that every echo involves the drone. Inset: the quadcopter model; “el” is the angle down to the radio as seen from the drone.</figcaption>
+      </figure>
+    </section>
+
+    <section id="maps" aria-labelledby="maps-title">
+      <h2 id="maps-title">What the maps show</h2>
+      <p>The maps in this section use the corrected ray-tracing output described under <a href="#checks">Checking the simulator first</a>. A <em>frame</em> is a short block of the signal, and the maps here have no receiver noise unless stated.</p>
+
+      <figure class="wide narrow">
+        <a class="frame" href="images/02_range_doppler.png" title="Open the full-size image">
+          <img src="images/02_range_doppler.png" width="1000" height="760" loading="lazy" decoding="async"
+               alt="Range-Doppler heat map with range on the horizontal axis and Doppler on the vertical axis. Bright horizontal bands, strongest just above zero Doppler, fill a stretch of short ranges where the drone is; farther ranges are dark.">
+        </a>
+        <figcaption><span class="fig-num">Figure 2.</span> <span class="takeaway">The drone shows up as bands at its range, spread in Doppler by the spinning blades.</span> Range-Doppler map of one frame in the main scene.</figcaption>
+      </figure>
+
+      <p><span class="lead-in">Range-Doppler map.</span> Each cell shows how much echo arrives from a given range at a given Doppler speed. The hovering body barely moves, while the blades move fast toward and away from the radio, so the drone’s echo spreads across Doppler as a set of bands. The signal’s bandwidth limits how finely range can be resolved, so the drone is smeared along range rather than showing up as a sharp point.</p>
+
+      <figure class="wide">
+        <a class="frame" href="images/03_micro_doppler.png" title="Open the full-size image">
+          <picture>
+            <source media="(max-width: 40rem)" srcset="images/03_micro_doppler_narrow.png" width="900" height="1160">
+            <img src="images/03_micro_doppler.png" width="1600" height="1040" loading="lazy" decoding="async"
+                 alt="Two stacked spectrograms of Doppler frequency versus time, one with the ground and one in open sky. Both show many evenly spaced horizontal lines above and below a dark band at zero Doppler, and the two panels look nearly the same. A right-hand axis numbers the lines as blade-flash harmonics.">
+          </picture>
+        </a>
+        <figcaption><span class="fig-num">Figure 3.</span> <span class="takeaway">Evenly spaced blade-flash lines on both sides of zero Doppler, steady while the drone hovers, with or without the ground.</span> Micro-Doppler spectrograms at the drone’s range: the main scene (top) and open sky (bottom). The right-hand axis numbers the blade-flash harmonics.</figcaption>
+      </figure>
+
+      <p><span class="lead-in">Micro-Doppler.</span> This is the classic blade-flash signature: a blade turned broadside to the radio returns a short, strong echo, and regular flashes form lines at multiples of the flash rate. The dark band at zero is where the receiver removed everything that stays constant. Without the ground, the same lines appear, which suggests they come from paths via the drone rather than via the ground. Blade speed is a simulator input, so this checks timing and processing, not blade physics.</p>
+
+      <figure class="wide">
+        <a class="frame" href="images/04_detection.png" title="Open the full-size image">
+          <picture>
+            <source media="(max-width: 40rem)" srcset="images/04_detection_narrow.png" width="900" height="1640">
+            <img src="images/04_detection.png" width="1600" height="760" loading="lazy" decoding="async"
+                 alt="Three range-Doppler heat maps, each with two dashed boxes marking the expected drone region above and below zero Doppler. The map without noise shows bright bands inside the boxes. The noisy map with the drone shows red detection crosses clustered at the lower edge of the upper box. The noisy map without the drone shows no crosses.">
+          </picture>
+        </a>
+        <figcaption><span class="fig-num">Figure 4.</span> <span class="takeaway">With the drone present, detections cluster in the expected drone region; with the drone absent, the region stays quiet.</span> Detection maps for one frame of the main scene: the drone’s echo without noise, the same echo with receiver noise, and the same noise with the drone removed. The two dashed boxes together form the expected drone region: the drone’s range, on both sides of the zero-Doppler band that the receiver removes. Crosses mark cells flagged by the detector. This is a different frame, on a different colour scale, from Figure 2, so the bands sit slightly differently.</figcaption>
+      </figure>
+
+      <p><span class="lead-in">Detection map.</span> The crosses come from a cell-averaging CFAR (constant false-alarm rate) detector, which compares each cell with the average of the cells around it. With the drone present, the detections cluster in the upper box, where this frame’s strongest band sits, and a few fall just below it. With the drone absent, the map stays quiet. The boxes sit at the known range, so this checks the detector, not a blind search over the map.</p>
+    </section>
+
+    <section id="checks" aria-labelledby="checks-title">
+      <h2 id="checks-title">Checking the simulator first</h2>
+      <p>A twin is only useful if you understand its output, so I checked each stage before trusting any map.</p>
+
+      <figure class="wide">
+        <a class="frame" href="images/05_receiver_check.png" title="Open the full-size image">
+          <img src="images/05_receiver_check.png" width="1600" height="745" loading="lazy" decoding="async"
+               alt="Two stacked plots of received power versus range, with dotted vertical lines at the three true reflector ranges. In the upper grey curve (earlier receiver) the peaks sit to the right of the dotted lines and the farthest reflector has no peak. In the lower blue curve (corrected receiver) all three peaks line up with the dotted lines.">
+        </a>
+        <figcaption><span class="fig-num">Figure 5.</span> <span class="takeaway">After the fix, each peak lands on its true range.</span> Range profiles of three synthetic point reflectors at known ranges (dotted lines), with no scene and no noise: an earlier version of the receiver (top) and the corrected receiver (bottom).</figcaption>
+      </figure>
+
+      <p><span class="lead-in">A known answer.</span> Before any drone result, I ran a known-answer test: three point reflectors at known ranges, passed through the receiver. An earlier version placed the echoes too far away and lost the farthest one. The corrected receiver puts each peak where it belongs.</p>
+
+      <figure class="wide">
+        <a class="frame" href="images/06_ground_reflection.png" title="Open the full-size image">
+          <picture>
+            <source media="(max-width: 40rem)" srcset="images/06_ground_reflection_narrow.png" width="900" height="1585">
+            <img src="images/06_ground_reflection.png" width="1600" height="745" loading="lazy" decoding="async"
+                 alt="Two stem plots of path strength versus delay, with and without the drone. In both, a tall orange stem at short delay marks the ground reflection. With the drone, a much weaker cluster of blue paths via the drone and grey paths via the drone and the ground sits at longer delay; without the drone, those paths are marked as absent.">
+          </picture>
+        </a>
+        <figcaption><span class="fig-num">Figure 6.</span> <span class="takeaway">The radio’s own ground reflection (orange) is far stronger than any path via the drone (blue and grey); this dominant path is the one occasionally missing from the stored ray-tracing output.</span> Paths at one instant in the main scene, with and without the drone.</figcaption>
+      </figure>
+
+      <p><span class="lead-in">Raw paths before maps.</span> Without the drone, one path remains: the radio’s reflection off the ground just below it, by far the strongest echo. In a small fraction of time steps, the stored ray-tracing output is missing it. I do not yet know why.</p>
+
+      <figure class="wide">
+        <a class="frame" href="images/07_range_doppler_repair.png" title="Open the full-size image">
+          <picture>
+            <source media="(max-width: 40rem)" srcset="images/07_range_doppler_repair_narrow.png" width="900" height="1280">
+            <img src="images/07_range_doppler_repair.png" width="1600" height="760" loading="lazy" decoding="async"
+                 alt="Two range-Doppler heat maps. The map as stored, with the ground reflection missing in a few time steps, is bright yellow across all Doppler values at the shortest ranges. The map with the ground reflection restored instead shows a set of horizontal bands at the drone's range.">
+          </picture>
+        </a>
+        <figcaption><span class="fig-num">Figure 7.</span> <span class="takeaway">A strong path that drops out for a few time steps paints a stripe across all Doppler speeds; putting it back removes the stripe.</span> The frame of Figure 2, as stored and with the ground reflection restored, on one colour scale.</figcaption>
+      </figure>
+
+      <p><span class="lead-in">What the gaps do.</span> Gaps in such a strong path spread its energy across all Doppler speeds, which paints the bright stripe near the radio in the map as stored. Restoring the path removes the stripe. This fixes the stored output, not the physics.</p>
+
+      <p><span class="lead-in">Repeatability.</span> The ray tracer samples rays at random, and a number called the <em>seed</em> controls that sampling. To see how much this matters, I used a second scene, with the drone farther away and nearly level with the radio, and ran it again with the same seed and with different seeds.</p>
+
+      <figure class="wide">
+        <a class="frame" href="images/08_scene_longer_range.png" title="Open the full-size image">
+          <img src="images/08_scene_longer_range.png" width="1600" height="737" loading="lazy" decoding="async"
+               alt="Side-view diagram like the main scene but with a longer, shallower line of sight between the drone on the left and the radio on the right. Labels list three drone heights and matching radio heights above the ground, and an inset shows the quadcopter model.">
+        </a>
+        <figcaption><span class="fig-num">Figure 8.</span> <span class="takeaway">A second scene, with the drone farther away and nearly level with the radio.</span> It is repeated at slightly different heights and used for the repeatability check in Figure 9.</figcaption>
+      </figure>
+
+      <figure class="wide narrow">
+        <a class="frame" href="images/09_phase_repeatability.png" title="Open the full-size image">
+          <img src="images/09_phase_repeatability.png" width="1600" height="1002" loading="lazy" decoding="async"
+               alt="Log-scale dot plot of the largest phase difference at three drone heights for three path types. Blue markers for reruns with the same seed sit near the bottom; red markers for a different seed sit several decades higher, with grey bars joining each pair.">
+        </a>
+        <figcaption><span class="fig-num">Figure 9.</span> <span class="takeaway">The same seed repeats almost exactly; a new seed moves the weak paths’ phase far more.</span> Largest change in the phase of paths that touch both the drone and the ground, at three drone heights and for three path types (legend), on a log scale. Blue: the same seed, run again. Red: a different seed.</figcaption>
+      </figure>
+
+      <p>Re-running with the same seed reproduces these weak paths almost exactly, while a new seed shifts their phase by orders of magnitude more. Each run is therefore one random outcome, and conclusions need to hold across seeds.</p>
+    </section>
+
+    <section id="next" aria-labelledby="next-title">
+      <h2 id="next-title">Next steps</h2>
+      <ul class="next-steps">
+        <li><strong>Moving drones and tracking:</strong> drones flying past the radio, a search over the whole map, and a tracker.</li>
+        <li><strong>Communication traffic:</strong> how the gaps left by traffic, and pilot-only frames built from standard reference signals, affect sensing.</li>
+        <li><strong>Design tool:</strong> using the twin to plan where antennas go and where they point.</li>
+        <li><strong>Realism:</strong> leakage from transmitter to receiver, phase noise, buildings, more airframes, and detection at different ranges.</li>
+      </ul>
+
+      <h3>Scenes under way</h3>
+      <p>Further scenes add a low wall (parapet) and swap in other airframes. They are shown here as setups only; results from them are still being checked.</p>
+
+      <figure class="wide">
+        <a class="frame" href="images/10_scene_parapet.png" title="Open the full-size image">
+          <img src="images/10_scene_parapet.png" width="1600" height="765" loading="lazy" decoding="async"
+               alt="Rendered outdoor scene with a grey ground plane, a light grey wall in the middle, the drone marker at upper left and the radio at right. A vertical scale above the wall marks the top-edge heights tested. A dashed line of sight passes over the wall. A solid path from the drone runs down into the wall, where a red cross marks it as blocked, and continues as a faded dotted line via the ground to the radio.">
+        </a>
+        <figcaption><span class="fig-num">Figure 10.</span> <span class="takeaway">At the height drawn, the wall blocks the path that bounces off the ground (red cross), while the line of sight still clears it.</span> A low wall (parapet) between the drone and the radio in the second scene, its top edge raised step by step. The drawn lines are geometric sketches, not solver output.</figcaption>
+      </figure>
+    </section>
+
+    <section id="status" aria-labelledby="status-title">
+      <h2 id="status-title">Status</h2>
+      <div class="note">
+        <p>This is ongoing, unpublished research. Everything shown here comes from simulation; no hardware measurements or real flights are shown, and the simulated radio front end is idealized. The figures are qualitative. Results will be reported once they are complete and checked. Code and data are not public yet.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Yunjung Jeong · Intelligent Radio Sensing Lab (IRS Lab), Department of Electrical Engineering and Computer Science, DGIST</p>
+      <p><a href="https://yunjung-jeong.github.io/cv/">Back to CV</a> · <a href="https://github.com/yunjung-jeong">GitHub</a> · Last updated September 2026</p>
+      <p class="copyright">© 2026 Yunjung Jeong. All rights reserved. Research conducted at the Intelligent Radio Sensing Lab (IRS Lab), DGIST; simulation results from ongoing research.</p>
+    </div>
+  </footer>
+</body>
+</html>
