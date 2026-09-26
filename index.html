@@ -80,7 +80,7 @@
 
     <section id="overview" aria-labelledby="overview-title">
       <h2 id="overview-title">What I am working on</h2>
-      <p>Small drones are hard to see by radio. They return weak echoes, fly low, and hover near the ground and buildings, which echo more strongly than the drone itself. Meanwhile, wireless networks are being designed to sense as well as communicate. In <em>integrated sensing and communication</em> (ISAC), a signal sent to carry data also works as a radar signal.</p>
+      <p>Small drones are hard to see by radio. They return weak echoes, fly low, and hover near the ground and buildings, which can echo far more strongly than the drone itself. Meanwhile, wireless networks are being designed to sense as well as communicate. In <em>integrated sensing and communication</em> (ISAC), a signal sent to carry data also works as a radar signal.</p>
       <p>I am studying whether a single software-defined radio can detect a drone and pick up the signature of its spinning blades. The radio would send a 5G-NR-like signal and listen to its own echoes. To understand what it should see, I am building a <em>digital twin</em>: a simulation detailed enough to predict those echoes, and open enough to show where it might mislead.</p>
     </section>
 
@@ -190,7 +190,7 @@
 
       <p><span class="lead-in">What the gaps do.</span> Gaps in such a strong path spread its energy across all Doppler speeds, which paints the bright stripe near the radio in the map as stored. Restoring the path removes the stripe. This fixes the stored output, not the physics.</p>
 
-      <p><span class="lead-in">Repeatability.</span> The ray tracer samples rays at random, and a number called the <em>seed</em> controls that sampling. To see how much this matters, I used a second scene, with the drone farther away and nearly level with the radio, and ran it again with the same seed and with different seeds.</p>
+      <p><span class="lead-in">Repeatability.</span> The ray tracer sends rays out in a fixed pattern, but at each bounce it makes random choices, such as whether a ray that hits the drone reflects like a mirror or scatters, and in which direction. A number called the <em>seed</em> controls those choices. To see how much this matters, I used a second scene, with the drone farther away and nearly level with the radio, and ran it again with the same seed and with different seeds.</p>
 
       <figure class="wide">
         <a class="frame" href="images/08_scene_longer_range.png" title="Open the full-size image">
@@ -214,7 +214,8 @@
     <section id="environments" aria-labelledby="environments-title">
       <h2 id="environments-title">Blade-flash signatures across environments (CW view)</h2>
       <p>The simulator turns the rotors forward in small steps and, at each step, adds up every ray-traced path at a single frequency. That is what a <em>continuous-wave</em> (CW) radar would receive: one steady tone, one sample per rotor step, and no range information. A short-time Fourier transform (Doppler over time, from short overlapping windows) turns that record into a blade-flash map. Ground, buildings and walls can echo far more strongly than the drone, or block the paths to it, so I placed the same hovering quadcopter in different surroundings: open sky, flat ground, buildings, the outdoor scene I built, NVIDIA’s built-in street canyon, and walls and parapets of different heights.</p>
-      <p><span class="lead-in">How to read the cards.</span> Each card shows the rendered scene, then two maps of Doppler over time. The first map keeps the constant echo; the second removes everything that stays constant, as the sensing receiver does. The band at zero in the first map looks wide only because each analysis window is short, not because anything in it moves, and the faint lines just outside it come from the same windowing. In every scene with ground or a wall, the still echo is so much stronger than the drone that the first map shows little besides this band, so those first maps look alike. The dashed lines mark the blade-tip Doppler, the largest Doppler that blade motion alone produces in that geometry; the short window smears each flash slightly past them. Every map is scaled to its own peak, so the maps compare shapes, not strengths. The same kind of repair as in Figures 6–7 is applied throughout, so brief gaps in the stored ray-tracing output do not show up as stripes. In the renders, the coloured markers only mark positions; the quadcopter itself is far smaller.</p>
+      <p><span class="lead-in">How to read the cards.</span> Each card shows the rendered scene, then two maps of Doppler over time. The first map keeps the constant echo; the second removes it by cutting a narrow band around zero Doppler, much as the sensing receiver does. The band at zero in the first map looks wide only because each analysis window is short, not because anything in it moves, and the faint lines just outside it come from the same windowing. In every scene with ground or a wall, the still echo is so much stronger than the drone that the first map shows little besides this band, so those first maps look alike.</p>
+      <p>The dashed lines mark the blade-tip Doppler, the largest Doppler that blade motion alone produces in that geometry; the short window smears each flash slightly past them. Fainter speckle farther past the dashed lines, strongest in the wall and parapet cards, comes from the ray-tracing simulation rather than from the blades. Every map is scaled to its own peak, so the maps compare shapes, not strengths. In both maps, brief glitches in the stored ray-tracing output are smoothed over, so they do not show up as stripes; the repair is similar to the one in Figures 6 and 7, not identical. In the renders, the coloured markers only mark positions; the quadcopter itself is far smaller.</p>
       <p><span class="lead-in">Same flashes as Figure 3, drawn differently.</span> Figure 3 uses long analysis windows that span many flashes, so the repeating flashes add up to evenly spaced horizontal lines. Here each window is shorter than the gap between two flashes, so each flash shows up as its own burst in time. For the same reason, the narrow cut at zero Doppler, which shows as a dark band in Figure 3, is too narrow to see here.</p>
 
       <h3 id="env-group-below">Radio well below the drone</h3>
@@ -279,7 +280,7 @@
                    alt="Two spectrograms of Doppler versus time for the drone with buildings nearby and no ground, with dashed blade-tip lines. Both views look like free space: with the constant echo kept, a band at zero Doppler from the drone body plus evenly spaced blade flashes; with it removed, the flashes alone. The buildings stand off to the side and send almost nothing back to the radio.">
             </picture>
           </a>
-          <figcaption><span class="takeaway">Buildings off to the side send almost nothing back at this angle, so both maps look like open sky.</span> The buildings and poles of our outdoor scene (next card), with the ground left out. The tallest building only looks as if it touches the radio: it stands well behind it, not beside it. Building edges are outlined in the render so that the boxes read as solid.</figcaption>
+          <figcaption><span class="takeaway">Buildings off to the side send almost nothing back at this angle, so both maps look like open sky.</span> The buildings and poles of our outdoor scene (next card), with the ground left out. In this scene, building surfaces reflect like mirrors and scatter nothing, which is part of why they add so little. The tallest building only looks as if it touches the radio: it stands well behind it, not beside it. Building edges are outlined in the render so that the boxes read as solid.</figcaption>
         </figure>
       </div>
 
@@ -326,7 +327,7 @@
       </div>
 
       <h3 id="env-group-walls">Second scene: walls and parapets</h3>
-      <p>These cards use the second scene (Figure 8): the drone farther away and nearly level with the radio, with a concrete panel halfway between them. The panel is either a parapet whose top edge is raised step by step, as in Figure 10 under <a href="#next">Next steps</a>, or a tall wall whose edge sits on the line of sight. This group also uses an antenna aimed at the drone and different ray-tracing settings. Its maps come out denser and more symmetric about zero than those above, partly because the geometry differs. Part of the spread, including the energy past the dashed lines that reaches the top and bottom edges, comes from the simulation rather than from the blades: in this group, the ray-traced echoes jump more from one rotor step to the next. Compare maps within a group rather than across the two groups.</p>
+      <p>These cards use the second scene (Figure 8): the drone farther away and nearly level with the radio, with a concrete panel halfway between them. The panel is either a parapet whose top edge is raised step by step, as in Figure 10 under <a href="#next">Next steps</a>, or a tall wall whose edge sits on the line of sight. This group also uses an antenna aimed at the drone and different ray-tracing settings. Its maps come out denser and more symmetric about zero than those above, partly because the geometry differs. Much of the spread, including most of the energy past the dashed lines that reaches the top and bottom edges, comes from the ray-tracing simulation rather than from the blades. In this group, the ray-traced echoes jump more from one rotor step to the next. With another seed, that spread and much of the fine pattern come out differently, so read only the broad differences between these cards. Compare maps within a group rather than across the two groups.</p>
 
       <div class="env-card" id="env-lowest-parapet">
         <h4>Lowest parapet: blocks nothing <span class="env-tag">Built for this project</span></h4>
@@ -345,7 +346,7 @@
                    alt="Two spectrograms of Doppler versus time in the second scene, with a parapet too low to block anything and dashed blade-tip lines. First, with the constant echo kept: only a wide bright band at zero Doppler. Second, with the constant echo removed: a repeating criss-cross pattern of blade flashes on both sides of zero between the dashed lines, over a speckled background that also fills the map beyond them.">
             </picture>
           </a>
-          <figcaption><span class="takeaway">A parapet too low to block anything: the reference for this group.</span> With the constant echo removed, a repeating criss-cross of blade flashes shows on both sides of zero. The speckled background around it, including what lies past the dashed lines, comes partly from the simulation settings, not from the blades.</figcaption>
+          <figcaption><span class="takeaway">A parapet too low to block anything: the reference for this group.</span> With the constant echo removed, a repeating criss-cross of blade flashes shows on both sides of zero. The speckled background around it, including what lies past the dashed lines, comes mostly from the ray-tracing simulation, not from the blades.</figcaption>
         </figure>
       </div>
 
@@ -387,7 +388,7 @@
                    alt="Two spectrograms of Doppler versus time in the second scene, with a wall whose edge hides half of the drone, and dashed blade-tip lines. First, with the constant echo kept: only a wide bright band at zero Doppler. Second, with the constant echo removed: a thinner flash pattern whose brightest parts sit closer to zero and on the negative-Doppler side.">
             </picture>
           </a>
-          <figcaption><span class="takeaway">When a wall’s vertical edge hides half of the drone, the flashes thin out and shift toward zero and the negative side.</span> Which parts of the rotors the radio can see shapes the signature. The wall’s edge cuts the path via the ground in the same way. In the render, the faint dotted stretch is only hidden from the camera, not from the radio; the wall’s edge itself lies on the line of sight.</figcaption>
+          <figcaption><span class="takeaway">When a wall’s vertical edge hides half of the drone, the flashes thin out and shift toward the negative side.</span> Which parts of the rotors the radio can see shapes the signature. The wall’s edge cuts the path via the ground in the same way. In this simulation, no signal bends around the wall’s edge, so its cut is sharp; a real edge would soften it. In the render, the faint dotted stretch is only hidden from the camera, not from the radio; the wall’s edge itself lies on the line of sight.</figcaption>
         </figure>
       </div>
 
@@ -405,10 +406,10 @@
             <picture>
               <source media="(max-width: 40rem)" srcset="images/20_stft_parapet_hidden_narrow.png" width="900" height="1120">
               <img src="images/20_stft_parapet_hidden.png" width="1600" height="650" loading="lazy" decoding="async"
-                   alt="Two spectrograms of Doppler versus time in the second scene, with a higher parapet that hides the whole drone. First, with the constant echo kept: only a wide bright band at zero Doppler, between dashed blade-tip lines. Second, with the constant echo removed: an empty dark panel labelled “no echo from the drone reaches the radio (no diffraction in this simulation)”.">
+                   alt="Two spectrograms of Doppler versus time in the second scene, with a higher parapet that hides the whole drone. First, with the constant echo kept: only a wide bright band at zero Doppler, between dashed blade-tip lines. Second, with the constant echo removed: an empty dark panel labelled “no echo from the drone reaches the radio (in this simulation, no signal bends over the parapet or passes through it)”.">
             </picture>
           </a>
-          <figcaption><span class="takeaway">A parapet high enough to hide the whole drone leaves nothing once the constant echo is removed.</span> The red cross marks where the parapet blocks the line of sight. This simulation has no diffraction, so the shadow is perfectly sharp; a real edge would bend some signal around it and leave a faint signature.</figcaption>
+          <figcaption><span class="takeaway">A parapet high enough to hide the whole drone leaves nothing once the constant echo is removed.</span> The red cross marks where the parapet blocks the line of sight. In this simulation, no signal bends over the parapet’s edge or passes through it, so the shadow is complete. A real parapet would let some signal over and through.</figcaption>
         </figure>
       </div>
 
@@ -420,17 +421,17 @@
           <picture>
             <source media="(max-width: 40rem)" srcset="images/20_stft_grid_narrow.png" width="900" height="1760">
             <img src="images/20_stft_grid.png" width="1600" height="890" loading="lazy" decoding="async"
-                 alt="Nine spectrograms of Doppler versus time, all with the constant echo removed, with dashed blade-tip lines. First group, radio well below the drone: free space, ground only, buildings only, our outdoor scene and the NVIDIA street canyon all show nearly the same evenly spaced blade flashes, strongest at positive Doppler and inside the dashed lines. Second group, the second scene: the lowest parapet and the parapet show a repeating pattern on both sides of zero over a speckled background that spreads past the dashed lines, the wall edge shows a thinner pattern shifted toward zero, and the higher-parapet panel is empty.">
+                 alt="Nine spectrograms of Doppler versus time, all with the constant echo removed, with dashed blade-tip lines. First group, radio well below the drone: free space, ground only, buildings only, our outdoor scene and the NVIDIA street canyon all show nearly the same evenly spaced blade flashes, strongest at positive Doppler and inside the dashed lines. Second group, the second scene: the lowest parapet and the parapet show a repeating pattern on both sides of zero over a speckled background that spreads past the dashed lines, the wall edge shows a thinner pattern, shifted toward zero and the negative side, and the higher-parapet panel is empty.">
           </picture>
         </a>
-        <figcaption><span class="takeaway">Still surroundings change the constant echo, not the blade flashes; hiding part of the drone changes the flashes.</span> The constant-echo-removed maps from every card above, with the blade-tip Doppler dashed. First group: radio well below the drone, from open sky to the NVIDIA street canyon. Second group: the second scene, from the lowest parapet to the higher parapet.</figcaption>
+        <figcaption><span class="takeaway">In these simulations, still surroundings mostly change the constant echo; hiding part of the drone changes the flashes.</span> The constant-echo-removed maps from every card above, with the blade-tip Doppler dashed. First group: radio well below the drone, from open sky to the NVIDIA street canyon. Second group: the second scene, from the lowest parapet to the higher parapet.</figcaption>
       </figure>
     </section>
 
     <section id="next" aria-labelledby="next-title">
       <h2 id="next-title">Next steps</h2>
       <ul class="next-steps">
-        <li><strong>Moving drones and tracking:</strong> drones flying past the radio, a search over the whole map, and a tracker.</li>
+        <li><strong>Moving drones and tracking:</strong> a first tracker now follows the drone’s range and its speed toward the radio, in one simulation of a drone heading straight for it. Broader tests, such as drones flying past the radio, are still to come.</li>
         <li><strong>Communication traffic:</strong> how the gaps left by traffic, and pilot-only frames built from standard reference signals, affect sensing.</li>
         <li><strong>Design tool:</strong> using the twin to plan where antennas go and where they point.</li>
         <li><strong>Realism:</strong> leakage from transmitter to receiver, phase noise, buildings in the full sensing chain, more airframes, and detection at different ranges.</li>
