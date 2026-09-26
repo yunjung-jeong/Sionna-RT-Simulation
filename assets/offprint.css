@@ -655,11 +655,13 @@ figcaption .takeaway { font-weight: 600; color: var(--ink); }
   color: var(--ink-muted);
 }
 
-@media (min-width: 48rem) {
+/* Only with the wide hero, which the <source> in index.html shows above 56rem (the stacked narrow one below). */
+@media (min-width: 56.01rem) {
   /* Column starts follow the panel titles inside the image (x = 12, 737, 1192 of 1600). */
   .hero-cap {
     display: grid;
     grid-template-columns: 725fr 455fr 408fr;
+    column-gap: 0;             /* the fr split already places the columns; a gap would push them off */
     align-items: start;
     padding: 0 calc(var(--plate-pad) + 1px) 0 calc(var(--plate-pad) + 1px + .75%);
   }
@@ -679,14 +681,16 @@ figcaption .takeaway { font-weight: 600; color: var(--ink); }
 }
 .env-card figure { margin: var(--s4) 0 0; }
 
-/* One plate per setting: the render and its maps share a single mount. */
+/* One plate per setting: the render and its maps share a single mount. The two
+   halves split the white between them, so the maps' title stands clear of the
+   render and either half's focus ring falls on white, not on the other image. */
 .env-card .frame:first-of-type {
   border-bottom: 0;
-  padding-bottom: 0;
+  padding-bottom: var(--s2);
 }
 .env-card .frame:nth-of-type(2) {
   border-top: 0;
-  padding-top: var(--plate-pad);
+  padding-top: var(--s2);
 }
 .env-card .frame:hover,
 .env-card .frame:focus-visible { border-color: var(--plate-edge); }
@@ -721,11 +725,14 @@ figcaption .takeaway { font-weight: 600; color: var(--ink); }
   color: var(--ink-muted);
 }
 
-/* Where the content column is about 56rem or wider, the render stands beside
+/* Where the content column is about 64rem or wider, the render stands beside
    its title and takeaway, and the maps run the full width beneath it. The two
    stay one plate: the render's mount opens straight into the maps' mount, and
-   the caption sits in the notch (render first, then maps, as before). */
-@media (min-width: 60rem) and (max-width: 71.99rem), (min-width: 76rem) {
+   the caption sits in the notch (render first, then maps, as before). On a
+   narrower column the title and caption outgrow the render (white would open
+   under it inside the plate) and the render's labels get small, so the card
+   stays stacked there. */
+@media (min-width: 85rem) {
   @supports (grid-template-rows: subgrid) {
     .env-card {
       display: grid;
@@ -755,7 +762,7 @@ figcaption .takeaway { font-weight: 600; color: var(--ink); }
       z-index: 1;
       margin-bottom: -1px;               /* covers the maps' top edge under it */
       border-bottom: 1px solid var(--plate);
-      padding-bottom: var(--plate-pad);
+      padding-bottom: var(--s3);         /* keeps the maps' title and the notch corner clear of the render */
     }
     .env-card .frame:first-of-type:hover,
     .env-card .frame:first-of-type:focus-visible { border-bottom: 1px solid var(--plate); }
@@ -934,9 +941,23 @@ figcaption .takeaway { font-weight: 600; color: var(--ink); }
   .section { margin-top: var(--s7); scroll-margin-top: calc(var(--bar-h) + var(--s4)); }
 }
 
+/* Between the phone band and 56rem the stacked _narrow sources are on screen
+   (the <source> media in index.html). Across the full column they would stand
+   taller than a tablet screen and set their labels above the body size, so they
+   sit on the text column, as the narrow plots do; the hero's caption follows its
+   plate. The wide-only figures (no <picture>) keep the full column. */
+@media (min-width: 40.01rem) and (max-width: 56rem) {
+  figure .frame:has(picture) {
+    max-width: 32rem;
+    margin-left: var(--indent);
+  }
+  .hero:has(picture) .hero-cap { padding-left: var(--indent); }   /* :has() as above, so the two move together */
+}
+
 /* =============================================================================
    Below 40rem: the marginal column collapses; labels sit above their text,
-   figures run edge to edge and switch to the stacked narrow sources.
+   figures run edge to edge. (The stacked narrow sources start below 56rem,
+   set on each <source> in index.html.)
    ============================================================================= */
 
 @media (max-width: 40rem) {
@@ -986,19 +1007,21 @@ figcaption .takeaway { font-weight: 600; color: var(--ink); }
   }
   .steps li::after { left: 1.0625rem; }
 
-  /* Edge to edge: the plate becomes a white band. */
+  /* Edge to edge: the plate becomes a white band. The side margin inside it keeps
+     the figures' axis labels off the screen edge. */
   figure .frame,
   figure.narrow .frame {
     max-width: none;
     margin-left: -1.25rem;
     margin-right: -1.25rem;
-    padding: var(--s1) 0;
+    padding: var(--s1) .5rem;
     border-left: 0;
     border-right: 0;
   }
   figure .frame:hover,
   figure .frame:focus-visible { border-left: 0; border-right: 0; }
-  .env-card .frame:first-of-type { padding-bottom: 0; }
+  /* The band meets the screen edges, so its focus ring is drawn inside it. */
+  figure .frame:focus-visible { outline-offset: -3px; }
 
   figure .frame + figcaption::before,
   .env-card .frame + .frame + figcaption::before {
