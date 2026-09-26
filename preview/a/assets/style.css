@@ -1,0 +1,1325 @@
+/* Sionna-RT-Simulation, variant A: "research project page" (refined).
+   Order after Nerfies (title, byline, teaser, at a glance, sections); section rules and per-panel
+   captions after NVlabs project pages; frameless figures and colour keys after Ciechanowski.
+   Tokens and type follow the CV that links here (yunjung-jeong.github.io/cv): warm paper, near-black
+   ink, one teal accent used only for links, focus and the current contents entry. Alegreya sets the
+   headings, its companion Alegreya Sans the text, Martian Mono the labels and numerals.
+   No cards, no shadows, no pills; hierarchy comes from size, weight and rule weight. */
+
+:root {
+  color-scheme: light dark;
+
+  --bg: #fbfaf6;
+  --band: #f2efe7;
+  --ink: #191714;
+  --text: #37342e;
+  --muted: #6e6a61;
+  --rule: #e4e0d5;
+  --rule-strong: #c6c0af;
+  --accent: #0e5f55;
+  --select: #d3e7e3;
+
+  /* Figures are white PNGs. On paper they are multiplied into the page (no frame); in the results
+     band they sit on a white mount with a hairline edge; in dark mode on a padded white plate. */
+  --plate: #ffffff;
+  --plate-edge: #d9d3c4;
+  --plate-pad: 0px;
+
+  /* Colours of the marks inside the figures, for the swatches in the captions. */
+  --k-orange: #d55e00;
+  --k-navy: #26448a;
+  --k-grey: #5b5b5b;
+  --k-blue: #1565c0;
+  --k-red: #e22146;
+
+  --serif: "Alegreya", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --sans: "Alegreya Sans", Seravek, "Gill Sans Nova", "Segoe UI", Ubuntu, Calibri, system-ui, sans-serif;
+  --mono: "Martian Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Lanes: body 60rem for text and default figures, wide 72rem for dense figures. */
+  --pad: clamp(1rem, 4vw, 2.5rem);
+  --body: 60rem;
+  --side: 6rem;
+  --measure: 37rem;
+  --cap: 42rem;
+  --bar: 2.875rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121110;
+    --band: #1c1a18;
+    --ink: #edeae3;
+    --text: #cbc6bc;
+    --muted: #928c81;
+    --rule: #2b2926;
+    --rule-strong: #454139;
+    --accent: #62b8aa;
+    --select: #16403a;
+
+    --plate: #ffffff;
+    --plate-edge: #ffffff;
+    --plate-pad: 0.5rem;
+
+    --k-orange: #f08a3c;
+    --k-navy: #8ea8e3;
+    --k-grey: #a8a8a8;
+    --k-blue: #6ea8ee;
+    --k-red: #ff6f88;
+  }
+}
+
+/* ------------------------------------------------------------------ base */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 1.1875rem;
+  line-height: 1.58;
+  font-kerning: normal;
+  font-variant-numeric: lining-nums;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+picture {
+  display: block;
+}
+
+p {
+  margin: 0 0 1.1rem;
+  text-wrap: pretty;
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+a {
+  color: var(--ink);
+  text-decoration-line: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: text-decoration-thickness 0.12s ease;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--select);
+  color: var(--ink);
+}
+
+[id] {
+  scroll-margin-top: calc(var(--bar) + 1rem);
+}
+
+/* Martian Mono runs wide; the CV sets it on its width axis, and so does this page. */
+.eyebrow,
+.status,
+.pn,
+.glance-title,
+.glance-list li::before,
+.toc a::before,
+.steps li::before,
+.fig-num,
+.env-tag,
+.footer-links,
+.skip-link,
+main > section > h2:not(.glance-title)::before {
+  font-family: var(--mono);
+  font-stretch: 82.5%;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 50;
+  padding: 0.6rem 0.9rem;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 0.75rem;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* ---------------------------------------------------------------- lanes
+   Every full-width block is a grid with the same named lines, so text, figures and
+   rules share edges down the page:  full | wide (72rem) | body (60rem) | wide | full. */
+
+.masthead,
+main > section,
+.toc,
+.site-footer {
+  display: grid;
+  grid-template-columns:
+    [full-start] minmax(var(--pad), 1fr)
+    [wide-start] minmax(0, var(--side))
+    [body-start] min(var(--body), 100% - 2 * var(--pad)) [body-end]
+    minmax(0, var(--side)) [wide-end]
+    minmax(var(--pad), 1fr) [full-end];
+}
+
+.masthead > *,
+main > section > *,
+.toc > *,
+.site-footer > * {
+  grid-column: body;
+  min-width: 0;
+}
+
+/* ------------------------------------------------------------- masthead
+   Left-aligned on the text edge; one ruled metadata line instead of buttons and chips. */
+
+.masthead {
+  padding: clamp(1.75rem, 3.2vw, 2.5rem) 0 0;
+}
+
+.eyebrow {
+  margin: 0 0 0.9rem;
+  font-size: 0.6875rem;
+  line-height: 1.4;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--ink);
+  font-family: var(--serif);
+  font-weight: 500;
+  text-wrap: balance;
+}
+
+h1 {
+  max-width: 14em;
+  margin: 0;
+  font-size: clamp(2.25rem, 1.3rem + 3.2vw, 3.625rem);
+  line-height: 1.04;
+  letter-spacing: -0.012em;
+}
+
+.subtitle {
+  max-width: 40rem;
+  margin: 0.85rem 0 0;
+  font-size: clamp(1.1875rem, 1rem + 0.55vw, 1.375rem);
+  line-height: 1.42;
+  color: var(--text);
+  text-wrap: balance;
+}
+
+.meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 1.75rem;
+  row-gap: 0.3rem;
+  margin-top: 1.5rem;
+  padding: 0.6rem 0 0.65rem;
+  border-top: 1px solid var(--rule-strong);
+  border-bottom: 1px solid var(--rule);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.meta-row p {
+  margin: 0;
+}
+
+.byline .author {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.byline .affiliation {
+  margin-left: 0.4rem;
+  color: var(--muted);
+}
+
+.links {
+  display: flex;
+  gap: 1.1rem;
+}
+
+.links a {
+  font-weight: 500;
+  text-decoration-color: var(--rule-strong);
+}
+
+.links a:hover,
+.links a:focus-visible {
+  text-decoration-color: var(--accent);
+}
+
+.links a::after {
+  content: "\2197";
+  content: "\2197" / "";
+  margin-left: 0.15em;
+  font-size: 0.85em;
+  color: var(--muted);
+  display: inline-block;
+  text-decoration: none;
+}
+
+.meta-row .status {
+  margin-left: auto;
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.status .chip + .chip::before {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 0.9em;
+  margin: 0 0.65rem;
+  background: var(--rule-strong);
+  vertical-align: -0.1em;
+}
+
+/* ------------------------------------------------ teaser and "at a glance" */
+
+main {
+  display: block;
+  counter-reset: sec;
+}
+
+#glance > .hero {
+  grid-column: wide;
+}
+
+.fig.hero {
+  margin: 1.75rem 0 0;
+}
+
+/* The caption grid is taken from the figure itself: its tracks start where the three panel titles
+   start inside 00_overview.png (0.94 %, 46.19 % and 74.63 % of the image width), and its box is the
+   image box, so the columns line up at every width where they sit side by side. */
+.hero figcaption {
+  display: grid;
+  grid-template-columns: 0.9375fr 45.25fr 28.4375fr 25.375fr;
+  max-width: none;
+  margin-top: 1rem;
+  padding-inline: var(--plate-pad);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.hero figcaption > * {
+  grid-column: 2 / -1;
+}
+
+.hero .panels {
+  display: contents;
+}
+
+.hero .takeaway {
+  display: block;
+  margin-bottom: 0.85rem;
+  font-family: var(--serif);
+  font-size: 1.375rem;
+  line-height: 1.3;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.hero .panel {
+  display: block;
+  padding: 0.55rem 1.5rem 0 0;
+  /* A rule over each part that stops short of the next one, like a table's column rules. */
+  background: linear-gradient(var(--rule-strong), var(--rule-strong)) no-repeat left top / calc(100% - 1.5rem) 1px;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.hero .panel:last-child {
+  background-size: 100% 1px;
+}
+
+.hero .panel:nth-child(1) { grid-column: 2; }
+.hero .panel:nth-child(2) { grid-column: 3; }
+.hero .panel:nth-child(3) { grid-column: 4; }
+
+.hero .pn {
+  display: block;
+  margin-bottom: 0.15rem;
+  font-size: 0.6875rem;
+  line-height: 1.5;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.hero .caption-foot {
+  display: block;
+  margin-top: 0.8rem;
+}
+
+.glance-title {
+  margin: 3.25rem 0 0.7rem;
+  font-size: 0.6875rem;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+main > section > ul.glance-list {
+  counter-reset: glance;
+  max-width: var(--measure);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: 1px solid var(--rule);
+}
+
+.glance-list li {
+  counter-increment: glance;
+  position: relative;
+  padding: 0.7rem 0 0.75rem 2.5rem;
+  border-top: 1px solid var(--rule);
+  font-size: 1.1875rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.glance-list li::before {
+  content: counter(glance, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0.7rem;
+  font-size: 0.6875rem;
+  line-height: 1.78rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+@media (min-width: 75rem) {
+  /* Numerals hang in the margin, on the same line as the section numerals below. */
+  .glance-list li {
+    padding-left: 0;
+  }
+
+  .glance-list li::before {
+    left: auto;
+    right: calc(100% + 1.5rem);
+  }
+}
+
+/* ------------------------------------------------------------------ TOC
+   A sticky bar, no JavaScript needed; toc.js only marks the current section. */
+
+.toc {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  margin-top: 4.25rem;
+  background: var(--bg);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.toc ul {
+  counter-reset: toc;
+  display: flex;
+  gap: 1.6rem;
+  height: var(--bar);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+
+.toc ul::-webkit-scrollbar {
+  display: none;
+}
+
+.toc li {
+  counter-increment: toc;
+  flex: none;
+  scroll-snap-align: start;
+}
+
+.toc a {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.toc a::before {
+  content: counter(toc, decimal-leading-zero);
+  margin-right: 0.5rem;
+  font-size: 0.625rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.toc a:hover {
+  color: var(--ink);
+}
+
+.toc a[aria-current] {
+  color: var(--ink);
+  box-shadow: inset 0 -2px 0 var(--accent);
+}
+
+.toc a:focus-visible {
+  outline-offset: -2px;
+}
+
+/* ------------------------------------------------------------- sections */
+
+main > section {
+  margin-top: 5.5rem;
+}
+
+main > section#glance {
+  margin-top: 0;
+}
+
+main > section > :last-child {
+  margin-bottom: 0;
+}
+
+main > section:not(#glance) {
+  counter-increment: sec;
+}
+
+main > section > h2:not(.glance-title) {
+  position: relative;
+  margin: 0 0 1.4rem;
+  padding-top: 0.85rem;
+  border-top: 2px solid var(--ink);
+  font-size: 2.125rem;
+  line-height: 1.12;
+  letter-spacing: -0.008em;
+}
+
+main > section > h2:not(.glance-title)::before {
+  content: counter(sec, decimal-leading-zero);
+  display: block;
+  margin-bottom: 0.45rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+@media (min-width: 75rem) {
+  /* The section numeral hangs in the wide margin, on the baseline of the heading. */
+  main > section > h2:not(.glance-title)::before {
+    position: absolute;
+    right: 100%;
+    top: 0.85rem;
+    margin: 0 1.5rem 0 0;
+    line-height: 2.38rem;
+    padding-top: 0.2rem;
+  }
+}
+
+main > section > p,
+main > section > ul,
+main > section > ol {
+  max-width: var(--measure);
+}
+
+main h3 {
+  margin: 4.25rem 0 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--ink);
+  font-size: 1.5rem;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+}
+
+.lead-in {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* Approach: a signal chain, numbered blocks joined by a line. */
+
+main > section > ol.steps {
+  counter-reset: step;
+  max-width: 56rem;
+  margin: 2rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.steps li {
+  counter-increment: step;
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.25rem 9.25rem minmax(0, var(--measure));
+  column-gap: 1.25rem;
+  padding-bottom: 1.5rem;
+}
+
+.steps li::before {
+  content: counter(step, decimal-leading-zero);
+  position: relative;
+  z-index: 1;
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  align-self: start;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid var(--ink);
+  background: var(--bg);
+  font-size: 0.6875rem;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.steps li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: calc(1.125rem - 0.5px);
+  top: 2.25rem;
+  bottom: 0;
+  width: 1px;
+  background: var(--rule-strong);
+}
+
+.steps strong {
+  grid-column: 2;
+  padding-top: 0.3rem;
+  line-height: 1.5;
+}
+
+.steps .step-text {
+  grid-column: 3;
+  padding-top: 0.3rem;
+  line-height: 1.55;
+}
+
+/* --------------------------------------------------- figures and captions */
+
+.fig {
+  margin: 2.5rem 0 3.75rem;
+}
+
+.fig .frame {
+  display: block;
+  cursor: zoom-in;
+}
+
+.fig img {
+  width: 100%;
+}
+
+@media (prefers-color-scheme: light) {
+  /* On paper the white of each PNG takes the paper tone, so figures print straight onto the page. */
+  .fig img {
+    mix-blend-mode: multiply;
+  }
+}
+
+.fig-wide {
+  grid-column: wide;
+}
+
+figcaption {
+  max-width: var(--cap);
+  margin-top: 0.85rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.fig-num {
+  margin-right: 0.35em;
+  font-size: 0.6875rem;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+figcaption .takeaway {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* Colour keys: a small mark in the figure's own colour and shape; the words stay in ink. */
+.key {
+  white-space: nowrap;
+}
+
+.key::before {
+  content: "";
+  display: inline-block;
+  margin: 0 0.3em 0 0.1em;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.key-orange { --k: var(--k-orange); }
+.key-blue { --k: var(--k-blue); }
+.key-red { --k: var(--k-red); }
+
+.key-line::before {
+  width: 0.95em;
+  height: 0.22em;
+  vertical-align: 0.24em;
+  background: var(--k);
+}
+
+.key-bluegrey::before {
+  height: 0.6em;
+  vertical-align: 0.06em;
+  background:
+    linear-gradient(var(--k-navy), var(--k-navy)) left top / 100% 0.2em no-repeat,
+    linear-gradient(var(--k-grey), var(--k-grey)) left bottom / 100% 0.2em no-repeat;
+}
+
+.key-dot::before {
+  width: 0.58em;
+  height: 0.58em;
+  border-radius: 50%;
+  vertical-align: 0.06em;
+  background: var(--k);
+}
+
+.key-cross::before {
+  width: 0.62em;
+  height: 0.62em;
+  vertical-align: 0.02em;
+  background:
+    linear-gradient(45deg, transparent 39%, var(--k) 39% 61%, transparent 61%),
+    linear-gradient(-45deg, transparent 39%, var(--k) 39% 61%, transparent 61%);
+}
+
+@supports (grid-template-columns: subgrid) {
+  /* Wide figures break out to 72rem; their captions stay on the text edge. */
+  .fig-wide:not(.hero) {
+    display: grid;
+    grid-template-columns: subgrid;
+  }
+
+  .fig-wide:not(.hero) > .frame {
+    grid-column: 1 / -1;
+  }
+
+  .fig-wide:not(.hero) > figcaption {
+    grid-column: 2;
+  }
+}
+
+.fig-side {
+  max-width: 36rem;
+}
+
+@media (min-width: 64rem) {
+  /* Narrow figures sit on the text edge with the caption beside them, bottom-aligned. */
+  .fig-side {
+    display: grid;
+    grid-template-columns: minmax(0, 36rem) minmax(0, 1fr);
+    column-gap: 2rem;
+    align-items: end;
+    max-width: none;
+  }
+
+  .fig-side figcaption {
+    max-width: 22rem;
+    margin: 0;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--rule-strong);
+  }
+}
+
+/* ---------------------------------------------------- environments band */
+
+main > section#environments {
+  margin-top: 5.5rem;
+  padding: 4.25rem 0 4.5rem;
+  background: var(--band);
+}
+
+main > section#environments + section {
+  margin-top: 5rem;
+}
+
+/* In the band the figures sit on white mounts with a hairline edge. */
+#environments .fig .frame {
+  background: var(--plate);
+  outline: 1px solid var(--plate-edge);
+  outline-offset: -1px;
+}
+
+#environments .fig img {
+  mix-blend-mode: normal;
+}
+
+#environments .fig .frame:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+#environments > h3 {
+  margin-top: 4.75rem;
+  border-top-color: var(--ink);
+}
+
+#environments > h3 + p {
+  max-width: var(--measure);
+}
+
+.env-card {
+  margin-top: 3rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--rule-strong);
+}
+
+h3 + p + .env-card {
+  margin-top: 2.5rem;
+}
+
+.env-card h4 {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  gap: 0.35rem;
+  margin: 0 0 1rem;
+  font-size: 1.375rem;
+  line-height: 1.22;
+}
+
+.env-tag {
+  font-size: 0.6875rem;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.env-fig {
+  margin: 0;
+}
+
+.env-fig .frame + .frame {
+  margin-top: 1rem;
+}
+
+.env-fig figcaption {
+  max-width: var(--measure);
+}
+
+@media (min-width: 64rem) {
+  @supports (grid-template-rows: subgrid) {
+    /* Render (7 of 12 columns) beside the name and takeaway; both maps full width beneath. */
+    .env-card {
+      display: grid;
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      grid-template-rows: auto 1fr auto;
+      column-gap: 2rem;
+    }
+
+    .env-card > h4 {
+      grid-column: 2;
+      grid-row: 1;
+      margin: 0 0 0.9rem;
+    }
+
+    .env-card > .env-fig {
+      grid-column: 1 / -1;
+      grid-row: 1 / 4;
+      display: grid;
+      grid-template-columns: subgrid;
+      grid-template-rows: subgrid;
+    }
+
+    .env-card .frame:first-of-type {
+      grid-column: 1;
+      grid-row: 1 / 3;
+    }
+
+    .env-card figcaption {
+      grid-column: 2;
+      grid-row: 2;
+      align-self: start;
+      margin: 0;
+    }
+
+    .env-card .frame:nth-of-type(2) {
+      grid-column: 1 / -1;
+      grid-row: 3;
+      margin-top: 1.5rem;
+    }
+  }
+}
+
+/* ---------------------------------------------------------- next steps */
+
+main > section > ul.next-steps {
+  max-width: var(--measure);
+  margin: 0.5rem 0 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: 1px solid var(--rule);
+}
+
+.next-steps li {
+  padding: 0.9rem 0 0.95rem;
+  border-top: 1px solid var(--rule);
+}
+
+/* --------------------------------------------------------------- status */
+
+.statement {
+  max-width: var(--cap);
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--rule-strong);
+}
+
+.statement p {
+  max-width: none;
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.3125rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+/* --------------------------------------------------------------- footer */
+
+.site-footer {
+  margin-top: 6rem;
+  padding: 1.75rem 0 3.5rem;
+  border-top: 1px solid var(--rule-strong);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.site-footer p {
+  margin: 0 0 0.5rem;
+}
+
+.footer-name {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.footer-links {
+  font-size: 0.6875rem;
+  line-height: 1.9;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.footer-links a {
+  color: var(--ink);
+}
+
+.site-footer .copyright {
+  max-width: var(--cap);
+  margin-top: 1.1rem;
+  font-size: 0.875rem;
+}
+
+/* ------------------------------------------------------------ dark mode */
+
+@media (prefers-color-scheme: dark) {
+  /* The figures are light PNGs: keep them on a white plate, never inverted or dimmed. */
+  .fig .frame {
+    padding: var(--plate-pad);
+    background: var(--plate);
+  }
+
+  #environments .fig .frame {
+    outline: none;
+  }
+}
+
+/* ---------------------------------------------------------- tablet/phone */
+
+@media (max-width: 63.99rem) {
+  .steps li {
+    grid-template-columns: 2.25rem 8.5rem minmax(0, 1fr);
+  }
+
+  /* The metadata line wraps as a block: names first, then links and status on one line. */
+  .meta-row .byline {
+    flex-basis: 100%;
+  }
+}
+
+@media (max-width: 47.99rem) {
+  .hero figcaption {
+    display: block;
+  }
+
+  .hero .panel,
+  .hero .panel:last-child {
+    padding: 0.5rem 0 0.6rem;
+    background-size: 100% 1px;
+  }
+
+  .hero .pn {
+    display: inline;
+    margin-right: 0.35em;
+  }
+
+  .steps li {
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+    column-gap: 1rem;
+  }
+
+  .steps strong,
+  .steps .step-text {
+    grid-column: 2;
+  }
+
+  .steps .step-text {
+    padding-top: 0.1rem;
+  }
+}
+
+@media (max-width: 40rem) {
+  body {
+    font-size: 1.125rem;
+  }
+
+  .masthead {
+    padding-top: 1.5rem;
+  }
+
+  .subtitle {
+    text-wrap: pretty;
+  }
+
+  .meta-row {
+    display: block;
+    padding: 0.65rem 0 0.7rem;
+  }
+
+  .byline .author,
+  .byline .affiliation {
+    display: block;
+    margin: 0;
+  }
+
+  .meta-row .links {
+    margin-top: 0.35rem;
+  }
+
+  .meta-row .status {
+    margin-top: 0.3rem;
+    margin-left: 0;
+  }
+
+  .status .chip {
+    display: block;
+  }
+
+  .status .chip + .chip::before {
+    display: none;
+  }
+
+  .fig.hero {
+    margin-top: 1.5rem;
+  }
+
+  .hero .takeaway {
+    font-size: 1.25rem;
+  }
+
+  .glance-title {
+    margin-top: 2.75rem;
+  }
+
+  .glance-list li {
+    font-size: 1.125rem;
+  }
+
+  .toc {
+    margin-top: 3.5rem;
+  }
+
+  .toc ul {
+    gap: 1.35rem;
+    padding-right: 2.5rem;
+    -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 2.5rem), transparent);
+    mask-image: linear-gradient(90deg, #000 calc(100% - 2.5rem), transparent);
+  }
+
+  main > section {
+    margin-top: 4rem;
+  }
+
+  main > section#environments {
+    margin-top: 4rem;
+    padding: 3rem 0 3.25rem;
+  }
+
+  main > section > h2:not(.glance-title) {
+    font-size: 1.75rem;
+  }
+
+  main h3 {
+    margin-top: 3.25rem;
+    font-size: 1.3125rem;
+  }
+
+  #environments > h3 {
+    margin-top: 3.25rem;
+  }
+
+  .env-card h4 {
+    font-size: 1.25rem;
+  }
+
+  .fig {
+    margin: 2rem 0 3rem;
+  }
+
+  /* Figures run edge to edge on phones; the narrow sources take over through <picture>. */
+  .fig .frame {
+    margin-left: calc(-1 * var(--pad));
+    margin-right: calc(-1 * var(--pad));
+  }
+
+  #environments .fig .frame {
+    outline: none;
+    border-top: 1px solid var(--plate-edge);
+    border-bottom: 1px solid var(--plate-edge);
+  }
+
+  .statement p {
+    font-size: 1.1875rem;
+  }
+
+  .site-footer {
+    margin-top: 4.5rem;
+  }
+}
+
+@media (max-width: 40rem) and (prefers-color-scheme: dark) {
+  .fig .frame {
+    padding: 0.35rem 0;
+  }
+
+  #environments .fig .frame {
+    border: 0;
+  }
+}
+
+/* ---------------------------------------------------------------- print */
+
+@media print {
+  :root {
+    --bg: #ffffff;
+    --band: #ffffff;
+    --ink: #000000;
+    --text: #1a1a1a;
+    --muted: #444444;
+    --rule: #bbbbbb;
+    --rule-strong: #888888;
+    --accent: #000000;
+    --plate-pad: 0px;
+  }
+
+  @page {
+    size: A4;
+    margin: 15mm 14mm;
+  }
+
+  body {
+    font-size: 10.5pt;
+  }
+
+  .toc,
+  .skip-link {
+    display: none;
+  }
+
+  .masthead {
+    padding-top: 0;
+  }
+
+  h1 {
+    font-size: 26pt;
+  }
+
+  .subtitle,
+  .hero .takeaway {
+    font-size: 13pt;
+  }
+
+  .meta-row {
+    font-size: 10pt;
+  }
+
+  .meta-row .status {
+    flex-basis: 100%;
+    margin-left: 0;
+  }
+
+  .glance-list li,
+  .statement p {
+    font-size: 11.5pt;
+  }
+
+  main > section > h2:not(.glance-title) {
+    font-size: 18pt;
+  }
+
+  main h3 {
+    margin-top: 2rem;
+    font-size: 14pt;
+  }
+
+  .env-card h4 {
+    font-size: 12pt;
+  }
+
+  figcaption,
+  .hero figcaption,
+  .site-footer {
+    font-size: 9pt;
+  }
+
+  main > section {
+    margin-top: 2.5rem;
+  }
+
+  .site-footer {
+    margin-top: 2.5rem;
+    break-inside: avoid;
+  }
+
+  main > section#environments {
+    padding: 0;
+    background: none;
+  }
+
+  .fig .frame,
+  #environments .fig .frame {
+    padding: 0;
+    background: none;
+    outline: none;
+  }
+
+  .fig img {
+    mix-blend-mode: normal;
+  }
+
+  /* The teaser may split from its caption so that it shares page 1 with the title. */
+  .fig:not(.hero),
+  .env-card,
+  .steps li,
+  .next-steps li,
+  .glance-list li,
+  .hero .frame {
+    break-inside: avoid;
+  }
+
+  .hero .frame img {
+    max-height: 40vh;
+    width: auto;
+  }
+
+  .hero figcaption {
+    display: block;
+  }
+
+  .hero .pn {
+    display: inline;
+  }
+
+  h2,
+  h3,
+  h4 {
+    break-after: avoid;
+  }
+
+  /* Print the addresses of the two outside links. */
+  .links a::after,
+  .footer-links a::after {
+    content: " " attr(href);
+    font: 400 8pt var(--mono);
+    letter-spacing: 0;
+    text-transform: none;
+    color: #444444;
+  }
+
+  a {
+    text-decoration-color: #888888;
+  }
+}
