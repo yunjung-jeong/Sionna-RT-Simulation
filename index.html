@@ -86,7 +86,7 @@
         <li><span class="stat-num">~40<span class="stat-unit">×</span></span><span class="stat-label">faster on long recordings with targeted ray launching</span></li>
         <li><span class="stat-num">1<span class="stat-unit">km</span></span><span class="stat-label">drone range simulated in open sky, on the radar-equation trend</span></li>
         <li><span class="stat-num">10</span><span class="stat-label">airframe models built, from mini quads to 1.3&nbsp;m</span></li>
-        <li><span class="stat-num">12</span><span class="stat-label">simulated surroundings, from open sky to city blocks</span></li>
+        <li><span class="stat-num">11</span><span class="stat-label">simulated surroundings, from open sky to city blocks</span></li>
       </ul>
     </section>
 
@@ -188,7 +188,7 @@
         </figure>
       </div>
 
-      <div class="carousel" data-carousel aria-label="Nine simulated surroundings">
+      <div class="carousel" data-carousel aria-label="Eight simulated surroundings">
         <div class="car-track" tabindex="0">
           <figure class="car-item">
             <a class="frame" href="images/21_scene_free_space.png?v=dc272d5c" title="Open the full-size image"><img src="images/21_scene_free_space_narrow.png?v=4e1c4ca9" width="900" height="720" loading="lazy" decoding="async" alt="Rendered view of an empty light-blue sky with no ground: a blue marker labelled drone and, lower and to the right, a pink marker labelled radio, joined by a dashed line of sight marked 15 m. A corner label reads open sky, no ground."></a>
@@ -222,17 +222,13 @@
             <a class="frame" href="images/21_scene_wall.png?v=c725f395" title="Open the full-size image"><img src="images/21_scene_wall_narrow.png?v=f1a02657" width="900" height="720" loading="lazy" decoding="async" alt="The same ground with a tall light-grey panel labelled wall standing halfway between the drone and the radio. The far vertical edge of the wall lies on the dashed 30 m line of sight, and the short stretch of line behind the wall is drawn faint and dotted, with a small note reading hidden from this view."></a>
             <figcaption class="tile-cap"><span class="tile-label">08</span> Wall edge</figcaption>
           </figure>
-          <figure class="car-item">
-            <a class="frame" href="images/21_scene_parapet_hidden.png?v=6c85467e" title="Open the full-size image"><img src="images/21_scene_parapet_hidden_narrow.png?v=466485c9" width="900" height="720" loading="lazy" decoding="async" alt="The same ground with a slightly taller parapet between the drone and the radio. The dashed line of sight from the radio stops at the parapet, where a red cross marks it as blocked, and continues to the drone only as a faint dotted line."></a>
-            <figcaption class="tile-cap"><span class="tile-label">09</span> High parapet</figcaption>
-          </figure>
         </div>
       </div>
 
       <div class="mosaic">
         <figure class="tile tile-full">
-          <a class="frame" href="images/20_stft_grid.png?v=1d0f3329" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/20_stft_grid_narrow.png?v=f155b01d" width="900" height="1760"><img src="images/20_stft_grid.png?v=1d0f3329" width="1600" height="890" loading="lazy" decoding="async" alt="Nine spectrograms of Doppler versus time, all with the constant echo removed, with dashed blade-tip lines. First group, radio well below the drone: free space, ground only, buildings only, our outdoor scene and the NVIDIA street canyon all show nearly the same evenly spaced blade flashes, strongest at positive Doppler and inside the dashed lines. Second group, the second scene: the lowest parapet and the parapet show a repeating pattern on both sides of zero over a speckled background that spreads past the dashed lines, the wall edge shows a thinner pattern, shifted toward zero and the negative side, and the higher-parapet panel is empty."></picture></a>
-          <figcaption class="tile-cap"><span class="tile-label">Nine signatures</span> Blade flashes in all nine: still surroundings change little, hiding the drone changes a lot.</figcaption>
+          <a class="frame" href="images/20_stft_grid.png?v=4b81e73c" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/20_stft_grid_narrow.png?v=a69b25db" width="900" height="1760"><img src="images/20_stft_grid.png?v=4b81e73c" width="1600" height="890" loading="lazy" decoding="async" alt="Eight spectrograms of Doppler versus time, all with the constant echo removed, with thin dashed blade-tip lines. First group, radio well below the drone: free space, ground only, buildings only, our outdoor scene and the NVIDIA street canyon all show nearly the same evenly spaced blade flashes, strongest at positive Doppler and inside the dashed lines. Second group, the second scene: the lowest parapet and the parapet show clean repeating flashes on both sides of zero, and the wall edge, which hides half of the drone, shows a lopsided pattern that is strongest at negative Doppler."></picture></a>
+          <figcaption class="tile-cap"><span class="tile-label">Eight signatures</span> Blade flashes in all eight: still surroundings change little, hiding half the drone changes a lot.</figcaption>
         </figure>
         <figure class="tile tile-full">
           <a class="frame" href="images/50_wind_rd.webp?v=5c0c8000" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/50_wind_rd_narrow.webp?v=2208adb5" width="1077" height="1160"><img src="images/50_wind_rd.webp?v=5c0c8000" width="1957" height="580" loading="lazy" decoding="async" alt="Four range-Doppler maps; the drone sits at about 15 metres. Calm: faint bands at the drone's range. Wind 10 metres per second with clutter in the drone's range cell: a bright band hugging zero Doppler at short ranges. Wind with clutter at all ranges: the band stretches along the whole range axis. At 5.8 gigahertz: a similar band on a wider Doppler axis."></picture></a>
