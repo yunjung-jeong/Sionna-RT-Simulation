@@ -14,14 +14,14 @@
   <meta property="og:title" content="Sensing Drones with Communication Signals">
   <meta property="og:description" content="Ongoing research by Yunjung Jeong: a ray-traced digital twin of how one radio could detect, track and characterise a drone and its spinning blades. All results shown are simulated.">
   <meta property="og:url" content="https://yunjung-jeong.github.io/Sionna-RT-Simulation/">
-  <meta property="og:image" content="https://yunjung-jeong.github.io/Sionna-RT-Simulation/images/00_overview.png">
+  <meta property="og:image" content="https://yunjung-jeong.github.io/Sionna-RT-Simulation/images/00_overview.png?v=e4078b7a">
   <meta property="og:image:width" content="1600">
   <meta property="og:image:height" content="530">
   <meta property="og:image:alt" content="Simulated scene of a drone and a radio, the range-Doppler map of the drone's echo, and a micro-Doppler spectrogram with evenly spaced blade-flash lines.">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="preload" as="image" href="media/trk_crossing_poster.webp" type="image/webp">
-  <link rel="stylesheet" href="assets/offprint.css">
+  <link rel="icon" href="assets/favicon.svg?v=50c4dee9" type="image/svg+xml">
+  <link rel="preload" as="image" href="media/trk_crossing_poster.webp?v=ebad3fce" type="image/webp">
+  <link rel="stylesheet" href="assets/offprint.css?v=d53d60d9">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" media="print" onload="this.media='all';this.onload=null"
@@ -30,8 +30,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..600;1,400..500&amp;family=Martian+Mono:wdth,wght@75..112.5,400..500&amp;display=swap">
   </noscript>
   <script>document.documentElement.classList.add('js');</script>
-  <script src="assets/contents.js" defer></script>
-  <script src="assets/page.js" defer></script>
+  <script src="assets/contents.js?v=23c5772c" defer></script>
+  <script src="assets/page.js?v=d9d66787" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -71,11 +71,11 @@
           <span class="stage-label">One radio tracking a drone, frame by frame</span>
         </div>
         <div class="clip clip-hero" data-clip>
-          <video id="clip-crossing" class="clip-video" width="1600" height="544" poster="media/trk_crossing_poster.webp" preload="none" muted loop playsinline controls
+          <video id="clip-crossing" class="clip-video" width="1600" height="544" poster="media/trk_crossing_poster.webp?v=ebad3fce" preload="none" muted loop playsinline controls
                  data-narrow="media/trk_crossing_narrow" data-narrow-size="1010x1010"
                  aria-label="Animation, simulated: a range-Doppler map frame by frame with detections and a tracker gate, next to a side view of the drone crossing in front of the radio and a range-versus-time strip where the track follows the true range.">
-            <source src="media/trk_crossing.webm" type="video/webm">
-            <source src="media/trk_crossing.mp4" type="video/mp4">
+            <source src="media/trk_crossing.webm?v=0a1bd946" type="video/webm">
+            <source src="media/trk_crossing.mp4?v=5a3c8f60" type="video/mp4">
           </video>
           <div class="clip-bar"><span class="clip-badge">8 m/s crossing</span></div>
         </div>
@@ -120,11 +120,11 @@
       <div class="mosaic">
         <figure class="tile tile-full">
           <div class="clip" data-clip>
-          <video id="clip-flyin" class="clip-video" width="1600" height="544" poster="media/trk_flyin_poster.webp" preload="none" muted loop playsinline controls
+          <video id="clip-flyin" class="clip-video" width="1600" height="544" poster="media/trk_flyin_poster.webp?v=161c6da9" preload="none" muted loop playsinline controls
                  data-narrow="media/trk_flyin_narrow" data-narrow-size="1010x1010"
                  aria-label="Animation, simulated: range-Doppler map frames with detections and a tracker gate as a drone flies straight toward the radio from about 50 m to 11 m, next to a side view and a range-versus-time strip where the track follows the falling true range.">
-            <source src="media/trk_flyin.webm" type="video/webm">
-            <source src="media/trk_flyin.mp4" type="video/mp4">
+            <source src="media/trk_flyin.webm?v=100a404d" type="video/webm">
+            <source src="media/trk_flyin.mp4?v=f04f8721" type="video/mp4">
           </video>
           <div class="clip-bar"><span class="clip-badge">8 m/s fly-in</span></div>
         </div>
@@ -132,11 +132,11 @@
         </figure>
         <figure class="tile tile-full">
           <div class="clip" data-clip>
-          <video id="clip-detect" class="clip-video" width="1600" height="544" poster="media/det_frames_poster.webp" preload="none" muted loop playsinline controls
+          <video id="clip-detect" class="clip-video" width="1600" height="544" poster="media/det_frames_poster.webp?v=ef4b4c31" preload="none" muted loop playsinline controls
                  data-narrow="media/det_frames_narrow" data-narrow-size="962x954"
                  aria-label="Animation, simulated: two range-Doppler maps per frame, one with the drone and one with the same noise but no drone, next to two grids of squares that fill in red frame by frame: hits at the drone on the left, false alarms on the right.">
-            <source src="media/det_frames.webm" type="video/webm">
-            <source src="media/det_frames.mp4" type="video/mp4">
+            <source src="media/det_frames.webm?v=4a773382" type="video/webm">
+            <source src="media/det_frames.mp4?v=f8ae943b" type="video/mp4">
           </video>
           <div class="clip-bar"><span class="clip-badge">100 frames</span></div>
         </div>
@@ -149,23 +149,23 @@
       <h2 id="signatures-title">Signatures</h2>
       <div class="mosaic">
         <figure class="tile tile-full">
-          <a class="frame" href="images/00_overview.png" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/00_overview_narrow.png" width="900" height="1390"><img src="images/00_overview.png" width="1600" height="530" loading="lazy" decoding="async" alt="Three panels. First, a rendered outdoor scene: a blue marker labelled drone hovers in the sky on the left, a pink marker labelled radio sits just above the grey ground on the right, a dashed line of sight joins them, and an inset shows the quadcopter model. Second, a range-Doppler heat map in which the drone appears as bright horizontal bands at short range. Third, a spectrogram of Doppler over time with many evenly spaced horizontal lines above and below zero."></picture></a>
+          <a class="frame" href="images/00_overview.png?v=e4078b7a" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/00_overview_narrow.png?v=ed2edc37" width="900" height="1390"><img src="images/00_overview.png?v=e4078b7a" width="1600" height="530" loading="lazy" decoding="async" alt="Three panels. First, a rendered outdoor scene: a blue marker labelled drone hovers in the sky on the left, a pink marker labelled radio sits just above the grey ground on the right, a dashed line of sight joins them, and an inset shows the quadcopter model. Second, a range-Doppler heat map in which the drone appears as bright horizontal bands at short range. Third, a spectrogram of Doppler over time with many evenly spaced horizontal lines above and below zero."></picture></a>
           <figcaption class="tile-cap"><span class="tile-label">Overview</span> From scene to signature: the ray-traced scene, its range-Doppler map, and the blade-flash lines.</figcaption>
         </figure>
         <figure class="tile tile-half">
-          <a class="frame" href="images/02_range_doppler.png" title="Open the full-size image"><picture><img src="images/02_range_doppler.png" width="1000" height="760" loading="lazy" decoding="async" alt="Range-Doppler heat map with range on the horizontal axis and Doppler on the vertical axis. Bright horizontal bands, strongest just above zero Doppler, fill a stretch of short ranges where the drone is; farther ranges are dark."></picture></a>
+          <a class="frame" href="images/02_range_doppler.png?v=2953c0cb" title="Open the full-size image"><picture><img src="images/02_range_doppler.png?v=2953c0cb" width="1000" height="760" loading="lazy" decoding="async" alt="Range-Doppler heat map with range on the horizontal axis and Doppler on the vertical axis. Bright horizontal bands, strongest just above zero Doppler, fill a stretch of short ranges where the drone is; farther ranges are dark."></picture></a>
           <figcaption class="tile-cap"><span class="tile-label">Range-Doppler</span> The drone shows up as bands at its range, spread in Doppler by the blades.</figcaption>
         </figure>
         <figure class="tile tile-half">
-          <a class="frame" href="images/03_micro_doppler.png" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/03_micro_doppler_narrow.png" width="900" height="1160"><img src="images/03_micro_doppler.png" width="1600" height="1040" loading="lazy" decoding="async" alt="Two stacked spectrograms of Doppler frequency versus time, one with the ground and one in open sky. Both show many evenly spaced horizontal lines above and below a dark band at zero Doppler, and the two panels look nearly the same. A right-hand axis numbers the lines as blade-flash harmonics."></picture></a>
+          <a class="frame" href="images/03_micro_doppler.png?v=a3e908d6" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/03_micro_doppler_narrow.png?v=c321d633" width="900" height="1160"><img src="images/03_micro_doppler.png?v=a3e908d6" width="1600" height="1040" loading="lazy" decoding="async" alt="Two stacked spectrograms of Doppler frequency versus time, one with the ground and one in open sky. Both show many evenly spaced horizontal lines above and below a dark band at zero Doppler, and the two panels look nearly the same. A right-hand axis numbers the lines as blade-flash harmonics."></picture></a>
           <figcaption class="tile-cap"><span class="tile-label">Micro-Doppler</span> Evenly spaced blade-flash lines, with and without the ground.</figcaption>
         </figure>
         <figure class="tile tile-full">
-          <a class="frame" href="images/33_blade_lines.webp" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/33_blade_lines_narrow.webp" width="900" height="1500"><img src="images/33_blade_lines.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Top: a long spectrogram of Doppler versus time over 0.69 seconds with a steady bright band around zero Doppler. Bottom left: a fine Doppler spectrum where four overlaid seeds show a comb of evenly spaced sharp lines. Bottom right: a zoom from minus 600 to plus 600 hertz showing eight sharp lines about 125 hertz apart."></picture></a>
+          <a class="frame" href="images/33_blade_lines.webp?v=4ece6429" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/33_blade_lines_narrow.webp?v=673e0284" width="900" height="1500"><img src="images/33_blade_lines.webp?v=4ece6429" width="1600" height="900" loading="lazy" decoding="async" alt="Top: a long spectrogram of Doppler versus time over 0.69 seconds with a steady bright band around zero Doppler. Bottom left: a fine Doppler spectrum where four overlaid seeds show a comb of evenly spaced sharp lines. Bottom right: a zoom from minus 600 to plus 600 hertz showing eight sharp lines about 125 hertz apart."></picture></a>
           <figcaption class="tile-cap"><span class="tile-label">Blade lines</span> Record the hover long enough and the flashes resolve into sharp blade-flash lines.</figcaption>
         </figure>
         <figure class="tile tile-full">
-          <a class="frame" href="images/40_airframes.webp" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/40_airframes_narrow.webp" width="1000" height="742"><img src="images/40_airframes.webp" width="1800" height="361" loading="lazy" decoding="async" alt="Top views of ten simplified drone models at one shared scale with a 1 metre scale bar, labelled by size and rotor count: mini quads A and B, compact quads A and B, mid quads A, B and C, a mid hexacopter, a large quad and a large octocopter, growing from about 20 centimetres to about 1.3 metres across."></picture></a>
+          <a class="frame" href="images/40_airframes.webp?v=128e6822" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/40_airframes_narrow.webp?v=dcaa0646" width="1000" height="742"><img src="images/40_airframes.webp?v=128e6822" width="1800" height="361" loading="lazy" decoding="async" alt="Top views of ten simplified drone models at one shared scale with a 1 metre scale bar, labelled by size and rotor count: mini quads A and B, compact quads A and B, mid quads A, B and C, a mid hexacopter, a large quad and a large octocopter, growing from about 20 centimetres to about 1.3 metres across."></picture></a>
           <figcaption class="tile-cap"><span class="tile-label">Airframes</span> Ten airframe models at true relative size, from mini quads to a large octocopter.</figcaption>
         </figure>
       </div>
@@ -175,15 +175,15 @@
       <h2 id="places-title">Places</h2>
       <div class="mosaic">
         <figure class="tile tile-third">
-          <a class="frame frame-dark" href="images/31_scene_etoile.webp" title="Open the full-size image"><img src="images/31_scene_etoile.webp" width="900" height="600" loading="lazy" decoding="async" alt="Rendered city model seen from above at an angle: blocks of buildings radiating around a large circular plaza (Paris, Étoile)."></a>
+          <a class="frame frame-dark" href="images/31_scene_etoile.webp?v=e7016313" title="Open the full-size image"><img src="images/31_scene_etoile.webp?v=e7016313" width="900" height="600" loading="lazy" decoding="async" alt="Rendered city model seen from above at an angle: blocks of buildings radiating around a large circular plaza (Paris, Étoile)."></a>
           <figcaption class="tile-cap"><span class="tile-label">City</span> Paris, Étoile</figcaption>
         </figure>
         <figure class="tile tile-third">
-          <a class="frame frame-dark" href="images/31_scene_florence.webp" title="Open the full-size image"><img src="images/31_scene_florence.webp" width="900" height="600" loading="lazy" decoding="async" alt="Rendered city model of dense old-town blocks with narrow streets and a domed cathedral near the centre (Florence)."></a>
+          <a class="frame frame-dark" href="images/31_scene_florence.webp?v=68443497" title="Open the full-size image"><img src="images/31_scene_florence.webp?v=68443497" width="900" height="600" loading="lazy" decoding="async" alt="Rendered city model of dense old-town blocks with narrow streets and a domed cathedral near the centre (Florence)."></a>
           <figcaption class="tile-cap"><span class="tile-label">City</span> Florence</figcaption>
         </figure>
         <figure class="tile tile-third">
-          <a class="frame frame-dark" href="images/31_scene_simple_street_canyon_with_cars.webp" title="Open the full-size image"><img src="images/31_scene_simple_street_canyon_with_cars.webp" width="900" height="600" loading="lazy" decoding="async" alt="Rendered street canyon: six tall coloured box buildings in cream, brown, red and purple lining a street."></a>
+          <a class="frame frame-dark" href="images/31_scene_simple_street_canyon_with_cars.webp?v=8c9a9ede" title="Open the full-size image"><img src="images/31_scene_simple_street_canyon_with_cars.webp?v=8c9a9ede" width="900" height="600" loading="lazy" decoding="async" alt="Rendered street canyon: six tall coloured box buildings in cream, brown, red and purple lining a street."></a>
           <figcaption class="tile-cap"><span class="tile-label">City</span> Street canyon with cars</figcaption>
         </figure>
       </div>
@@ -191,39 +191,39 @@
       <div class="carousel" data-carousel aria-label="Nine simulated surroundings">
         <div class="car-track" tabindex="0">
           <figure class="car-item">
-            <a class="frame" href="images/21_scene_free_space.png" title="Open the full-size image"><img src="images/21_scene_free_space_narrow.png" width="900" height="720" loading="lazy" decoding="async" alt="Rendered view of an empty light-blue sky with no ground: a blue marker labelled drone and, lower and to the right, a pink marker labelled radio, joined by a dashed line of sight marked 15 m. A corner label reads open sky, no ground."></a>
+            <a class="frame" href="images/21_scene_free_space.png?v=dc272d5c" title="Open the full-size image"><img src="images/21_scene_free_space_narrow.png?v=4e1c4ca9" width="900" height="720" loading="lazy" decoding="async" alt="Rendered view of an empty light-blue sky with no ground: a blue marker labelled drone and, lower and to the right, a pink marker labelled radio, joined by a dashed line of sight marked 15 m. A corner label reads open sky, no ground."></a>
             <figcaption class="tile-cap"><span class="tile-label">01</span> Open sky</figcaption>
           </figure>
           <figure class="car-item">
-            <a class="frame" href="images/21_scene_ground_only.png" title="Open the full-size image"><img src="images/21_scene_ground_only_narrow.png" width="900" height="720" loading="lazy" decoding="async" alt="The same view with a large flat grey ground plate far below: the blue drone marker and the pink radio marker hang high above it, joined by a dashed 15 m line of sight. A thin dotted line drops from each marker to a small shadow on the ground. A corner label reads ground."></a>
+            <a class="frame" href="images/21_scene_ground_only.png?v=8189fd8b" title="Open the full-size image"><img src="images/21_scene_ground_only_narrow.png?v=4cef4edd" width="900" height="720" loading="lazy" decoding="async" alt="The same view with a large flat grey ground plate far below: the blue drone marker and the pink radio marker hang high above it, joined by a dashed 15 m line of sight. A thin dotted line drops from each marker to a small shadow on the ground. A corner label reads ground."></a>
             <figcaption class="tile-cap"><span class="tile-label">02</span> Flat ground</figcaption>
           </figure>
           <figure class="car-item">
-            <a class="frame" href="images/21_scene_buildings_only.png" title="Open the full-size image"><img src="images/21_scene_buildings_only_narrow.png" width="900" height="720" loading="lazy" decoding="async" alt="The same view with four pale box-shaped buildings and two thin grey poles floating in the sky around the drone and radio markers, with no ground beneath them. The dashed 15 m line of sight passes between them; the tallest building appears just behind the radio marker. A corner label reads no ground."></a>
+            <a class="frame" href="images/21_scene_buildings_only.png?v=0bfddeca" title="Open the full-size image"><img src="images/21_scene_buildings_only_narrow.png?v=33c1ef4f" width="900" height="720" loading="lazy" decoding="async" alt="The same view with four pale box-shaped buildings and two thin grey poles floating in the sky around the drone and radio markers, with no ground beneath them. The dashed 15 m line of sight passes between them; the tallest building appears just behind the radio marker. A corner label reads no ground."></a>
             <figcaption class="tile-cap"><span class="tile-label">03</span> Buildings</figcaption>
           </figure>
           <figure class="car-item">
-            <a class="frame" href="images/21_scene_our_scene.png" title="Open the full-size image"><img src="images/21_scene_our_scene_narrow.png" width="900" height="720" loading="lazy" decoding="async" alt="The same view of the full outdoor scene: a grey ground plate with four pale box buildings and two thin poles. The blue drone marker hovers high above the ground and the pink radio marker sits lower, joined by a dashed 15 m line of sight. Thin dotted lines drop from both markers to small shadows on the ground; the radio’s lands well in front of the tallest building. A corner label reads ground and buildings."></a>
+            <a class="frame" href="images/21_scene_our_scene.png?v=1759fd8b" title="Open the full-size image"><img src="images/21_scene_our_scene_narrow.png?v=049948d0" width="900" height="720" loading="lazy" decoding="async" alt="The same view of the full outdoor scene: a grey ground plate with four pale box buildings and two thin poles. The blue drone marker hovers high above the ground and the pink radio marker sits lower, joined by a dashed 15 m line of sight. Thin dotted lines drop from both markers to small shadows on the ground; the radio’s lands well in front of the tallest building. A corner label reads ground and buildings."></a>
             <figcaption class="tile-cap"><span class="tile-label">04</span> Our outdoor scene</figcaption>
           </figure>
           <figure class="car-item">
-            <a class="frame" href="images/21_scene_street_canyon.png" title="Open the full-size image"><img src="images/21_scene_street_canyon_narrow.png" width="900" height="720" loading="lazy" decoding="async" alt="View looking down a narrow street between tall coloured buildings (brown, purple, beige and red blocks) in a built-in street scene. The blue drone marker hovers in the street and the pink radio marker sits lower and nearer, joined by a dashed line of sight marked 15 m."></a>
+            <a class="frame" href="images/21_scene_street_canyon.png?v=adf5be6a" title="Open the full-size image"><img src="images/21_scene_street_canyon_narrow.png?v=9d87707f" width="900" height="720" loading="lazy" decoding="async" alt="View looking down a narrow street between tall coloured buildings (brown, purple, beige and red blocks) in a built-in street scene. The blue drone marker hovers in the street and the pink radio marker sits lower and nearer, joined by a dashed line of sight marked 15 m."></a>
             <figcaption class="tile-cap"><span class="tile-label">05</span> Street canyon</figcaption>
           </figure>
           <figure class="car-item">
-            <a class="frame" href="images/21_scene_lowest_parapet.png" title="Open the full-size image"><img src="images/21_scene_lowest_parapet_narrow.png" width="900" height="720" loading="lazy" decoding="async" alt="Wide grey ground with a very low strip-like wall labelled parapet between the blue drone marker on the left and the pink radio marker on the right. The dashed 30 m line of sight passes well above it, so nothing stands in the way."></a>
+            <a class="frame" href="images/21_scene_lowest_parapet.png?v=f6b08890" title="Open the full-size image"><img src="images/21_scene_lowest_parapet_narrow.png?v=5c6fb8f8" width="900" height="720" loading="lazy" decoding="async" alt="Wide grey ground with a very low strip-like wall labelled parapet between the blue drone marker on the left and the pink radio marker on the right. The dashed 30 m line of sight passes well above it, so nothing stands in the way."></a>
             <figcaption class="tile-cap"><span class="tile-label">06</span> Low parapet</figcaption>
           </figure>
           <figure class="car-item">
-            <a class="frame" href="images/21_scene_parapet.png" title="Open the full-size image"><img src="images/21_scene_parapet_narrow.png" width="900" height="720" loading="lazy" decoding="async" alt="Wide grey ground with a low light-grey wall labelled parapet standing halfway between the blue drone marker on the left and the pink radio marker on the right. The dashed 30 m line of sight passes just over the top of the parapet."></a>
+            <a class="frame" href="images/21_scene_parapet.png?v=b472e8f3" title="Open the full-size image"><img src="images/21_scene_parapet_narrow.png?v=cdda85ff" width="900" height="720" loading="lazy" decoding="async" alt="Wide grey ground with a low light-grey wall labelled parapet standing halfway between the blue drone marker on the left and the pink radio marker on the right. The dashed 30 m line of sight passes just over the top of the parapet."></a>
             <figcaption class="tile-cap"><span class="tile-label">07</span> Parapet</figcaption>
           </figure>
           <figure class="car-item">
-            <a class="frame" href="images/21_scene_wall.png" title="Open the full-size image"><img src="images/21_scene_wall_narrow.png" width="900" height="720" loading="lazy" decoding="async" alt="The same ground with a tall light-grey panel labelled wall standing halfway between the drone and the radio. The far vertical edge of the wall lies on the dashed 30 m line of sight, and the short stretch of line behind the wall is drawn faint and dotted, with a small note reading hidden from this view."></a>
+            <a class="frame" href="images/21_scene_wall.png?v=c725f395" title="Open the full-size image"><img src="images/21_scene_wall_narrow.png?v=f1a02657" width="900" height="720" loading="lazy" decoding="async" alt="The same ground with a tall light-grey panel labelled wall standing halfway between the drone and the radio. The far vertical edge of the wall lies on the dashed 30 m line of sight, and the short stretch of line behind the wall is drawn faint and dotted, with a small note reading hidden from this view."></a>
             <figcaption class="tile-cap"><span class="tile-label">08</span> Wall edge</figcaption>
           </figure>
           <figure class="car-item">
-            <a class="frame" href="images/21_scene_parapet_hidden.png" title="Open the full-size image"><img src="images/21_scene_parapet_hidden_narrow.png" width="900" height="720" loading="lazy" decoding="async" alt="The same ground with a slightly taller parapet between the drone and the radio. The dashed line of sight from the radio stops at the parapet, where a red cross marks it as blocked, and continues to the drone only as a faint dotted line."></a>
+            <a class="frame" href="images/21_scene_parapet_hidden.png?v=6c85467e" title="Open the full-size image"><img src="images/21_scene_parapet_hidden_narrow.png?v=466485c9" width="900" height="720" loading="lazy" decoding="async" alt="The same ground with a slightly taller parapet between the drone and the radio. The dashed line of sight from the radio stops at the parapet, where a red cross marks it as blocked, and continues to the drone only as a faint dotted line."></a>
             <figcaption class="tile-cap"><span class="tile-label">09</span> High parapet</figcaption>
           </figure>
         </div>
@@ -231,11 +231,11 @@
 
       <div class="mosaic">
         <figure class="tile tile-full">
-          <a class="frame" href="images/20_stft_grid.png" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/20_stft_grid_narrow.png" width="900" height="1760"><img src="images/20_stft_grid.png" width="1600" height="890" loading="lazy" decoding="async" alt="Nine spectrograms of Doppler versus time, all with the constant echo removed, with dashed blade-tip lines. First group, radio well below the drone: free space, ground only, buildings only, our outdoor scene and the NVIDIA street canyon all show nearly the same evenly spaced blade flashes, strongest at positive Doppler and inside the dashed lines. Second group, the second scene: the lowest parapet and the parapet show a repeating pattern on both sides of zero over a speckled background that spreads past the dashed lines, the wall edge shows a thinner pattern, shifted toward zero and the negative side, and the higher-parapet panel is empty."></picture></a>
+          <a class="frame" href="images/20_stft_grid.png?v=1d0f3329" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/20_stft_grid_narrow.png?v=f155b01d" width="900" height="1760"><img src="images/20_stft_grid.png?v=1d0f3329" width="1600" height="890" loading="lazy" decoding="async" alt="Nine spectrograms of Doppler versus time, all with the constant echo removed, with dashed blade-tip lines. First group, radio well below the drone: free space, ground only, buildings only, our outdoor scene and the NVIDIA street canyon all show nearly the same evenly spaced blade flashes, strongest at positive Doppler and inside the dashed lines. Second group, the second scene: the lowest parapet and the parapet show a repeating pattern on both sides of zero over a speckled background that spreads past the dashed lines, the wall edge shows a thinner pattern, shifted toward zero and the negative side, and the higher-parapet panel is empty."></picture></a>
           <figcaption class="tile-cap"><span class="tile-label">Nine signatures</span> Blade flashes in all nine: still surroundings change little, hiding the drone changes a lot.</figcaption>
         </figure>
         <figure class="tile tile-full">
-          <a class="frame" href="images/50_wind_rd.webp" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/50_wind_rd_narrow.webp" width="1077" height="1160"><img src="images/50_wind_rd.webp" width="1957" height="580" loading="lazy" decoding="async" alt="Four range-Doppler maps; the drone sits at about 15 metres. Calm: faint bands at the drone's range. Wind 10 metres per second with clutter in the drone's range cell: a bright band hugging zero Doppler at short ranges. Wind with clutter at all ranges: the band stretches along the whole range axis. At 5.8 gigahertz: a similar band on a wider Doppler axis."></picture></a>
+          <a class="frame" href="images/50_wind_rd.webp?v=5c0c8000" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/50_wind_rd_narrow.webp?v=2208adb5" width="1077" height="1160"><img src="images/50_wind_rd.webp?v=5c0c8000" width="1957" height="580" loading="lazy" decoding="async" alt="Four range-Doppler maps; the drone sits at about 15 metres. Calm: faint bands at the drone's range. Wind 10 metres per second with clutter in the drone's range cell: a bright band hugging zero Doppler at short ranges. Wind with clutter at all ranges: the band stretches along the whole range axis. At 5.8 gigahertz: a similar band on a wider Doppler axis."></picture></a>
           <figcaption class="tile-cap"><span class="tile-label">Wind</span> Simulated wind-blown vegetation smears clutter around zero Doppler, next to the drone.</figcaption>
         </figure>
       </div>
@@ -245,7 +245,7 @@
       <h2 id="speed-title">Speed &amp; range</h2>
       <div class="mosaic">
         <figure class="tile tile-full">
-          <a class="frame" href="images/30_launch_compare.webp" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/30_launch_compare_narrow.webp" width="900" height="1500"><img src="images/30_launch_compare.webp" width="1600" height="820" loading="lazy" decoding="async" alt="Four spectrograms of Doppler versus time and a line plot. Top row: full-sphere launch with two random seeds; bottom row: targeted launch with two random seeds. All four show the same bright band around zero Doppler. The line plot overlays the time-averaged Doppler spectra: seven grey full-sphere curves and two teal targeted curves that fall off together."></picture></a>
+          <a class="frame" href="images/30_launch_compare.webp?v=5b895259" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/30_launch_compare_narrow.webp?v=a8e7736a" width="900" height="1500"><img src="images/30_launch_compare.webp?v=5b895259" width="1600" height="820" loading="lazy" decoding="async" alt="Four spectrograms of Doppler versus time and a line plot. Top row: full-sphere launch with two random seeds; bottom row: targeted launch with two random seeds. All four show the same bright band around zero Doppler. The line plot overlays the time-averaged Doppler spectra: seven grey full-sphere curves and two teal targeted curves that fall off together."></picture></a>
           <figcaption class="tile-cap"><span class="tile-label">Targeted launch</span> Targeted ray launching matches a full-sphere launch within its seed-to-seed spread, up to ~40× faster.</figcaption>
         </figure>
         <figure class="tile tile-half num-tile">
@@ -253,11 +253,11 @@
           <figcaption class="tile-cap"><span class="tile-label">Long range</span> A drone up to 1&nbsp;km away, still on the expected trend.</figcaption>
         </figure>
         <figure class="tile tile-half">
-          <a class="frame" href="images/32_range_stft.webp" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/32_range_stft_narrow.webp" width="900" height="1400"><img src="images/32_range_stft.webp" width="1600" height="520" loading="lazy" decoding="async" alt="Three spectrograms of Doppler versus time for the same hovering drone in open sky at 15, 42 and 85 metres. All three show a bright band around zero Doppler with striations out to a few kilohertz; the band looks much the same at every range."></picture></a>
+          <a class="frame" href="images/32_range_stft.webp?v=4e57f420" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/32_range_stft_narrow.webp?v=40a03d3a" width="900" height="1400"><img src="images/32_range_stft.webp?v=4e57f420" width="1600" height="520" loading="lazy" decoding="async" alt="Three spectrograms of Doppler versus time for the same hovering drone in open sky at 15, 42 and 85 metres. All three show a bright band around zero Doppler with striations out to a few kilohertz; the band looks much the same at every range."></picture></a>
           <figcaption class="tile-cap"><span class="tile-label">Farther</span> The same hover at 15, 42 and 85&nbsp;m keeps its signature shape.</figcaption>
         </figure>
         <figure class="tile tile-full">
-          <a class="frame" href="images/42_detect_launch.webp" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/42_detect_launch_narrow.webp" width="932" height="1168"><img src="images/42_detect_launch.webp" width="1809" height="584" loading="lazy" decoding="async" alt="Four range-Doppler maps with a colour bar of power over noise. Two geometries, drone seen from 15 degrees above and from 45 degrees below, each run with a full-sphere and a targeted launch. A red cross marks the detection, at the drone's range for both launches."></picture></a>
+          <a class="frame" href="images/42_detect_launch.webp?v=b8f1e15d" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/42_detect_launch_narrow.webp?v=f3ff915e" width="932" height="1168"><img src="images/42_detect_launch.webp?v=b8f1e15d" width="1809" height="584" loading="lazy" decoding="async" alt="Four range-Doppler maps with a colour bar of power over noise. Two geometries, drone seen from 15 degrees above and from 45 degrees below, each run with a full-sphere and a targeted launch. A red cross marks the detection, at the drone's range for both launches."></picture></a>
           <figcaption class="tile-cap"><span class="tile-label">Detection</span> Through the full detection chain, both launches find the drone in the same range cell.</figcaption>
         </figure>
       </div>
