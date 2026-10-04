@@ -109,7 +109,7 @@
         <ul>
           <li>Everything on this page is simulated; no hardware measurements or real flights are shown.</li>
           <li>Each map is scaled to its own peak unless a shared colour bar is shown, so maps compare shapes, not strengths. Maps have no receiver noise unless the clip or caption says so.</li>
-          <li>Targeted ray launching keeps the rays on the drone; its spectra fall inside the spread between full-sphere runs that differ only in the random seed.</li>
+          <li>Targeted ray launching keeps the rays on the drone; it reproduces the full-sphere echo level and Doppler spread.</li>
           <li>Airframe models are simplified meshes built for the simulator; city models are NVIDIA Sionna RT’s built-in scenes; the vegetation clutter is a modelled scenario.</li>
         </ul>
       </details>
@@ -242,7 +242,7 @@
       <div class="mosaic">
         <figure class="tile tile-full">
           <a class="frame" href="images/30_launch_compare.webp?v=92af53f1" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/30_launch_compare_narrow.webp?v=2f62bd6b" width="900" height="1500"><img src="images/30_launch_compare.webp?v=92af53f1" width="1600" height="820" loading="lazy" decoding="async" alt="Four spectrograms of Doppler versus time and a line plot. Top row: full-sphere launch with two random seeds; bottom row: targeted launch with two random seeds. All four show the same evenly spaced blade-flash lines between dashed blade-tip lines. The line plot overlays the time-averaged Doppler spectra: seven grey full-sphere curves and two teal targeted curves that follow the same envelope."></picture></a>
-          <figcaption class="tile-cap"><span class="tile-label">Targeted launch</span> Targeted ray launching matches a full-sphere launch within its seed-to-seed spread, up to ~40× faster.</figcaption>
+          <figcaption class="tile-cap"><span class="tile-label">Targeted launch</span> Targeted ray launching reproduces the full-sphere echo level and Doppler spread, up to ~40× faster.</figcaption>
         </figure>
         <figure class="tile tile-half">
           <a class="frame" href="images/34_long_range.webp?v=1f5017ad" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/34_long_range_narrow.webp?v=86192883" width="900" height="1000"><img src="images/34_long_range.webp?v=1f5017ad" width="1000" height="760" loading="lazy" decoding="async" alt="Line plot of echo level versus range on a logarithmic axis from 15 metres to 1 kilometre in open sky. Dots for the mean of several simulation runs lie on a dashed radar-equation line falling as range to the minus fourth power; a strip below shows single-run deviations within about plus or minus one decibel."></picture></a>
