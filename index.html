@@ -84,7 +84,7 @@
 
       <ul class="stats" aria-label="The twin in numbers (all from simulation)">
         <li><span class="stat-num">~40<span class="stat-unit">×</span></span><span class="stat-label">faster with targeted ray launching</span></li>
-        <li><span class="stat-num">1<span class="stat-unit">km</span></span><span class="stat-label">drone range, open sky</span></li>
+        <li><span class="stat-num">1<span class="stat-unit">km</span></span><span class="stat-label">simulated range, open sky</span></li>
         <li><span class="stat-num">10</span><span class="stat-label">airframe models</span></li>
         <li><span class="stat-num">11</span><span class="stat-label">simulated surroundings</span></li>
       </ul>
@@ -125,13 +125,13 @@
           <div class="clip" data-clip>
           <video id="clip-detect" class="clip-video" width="1600" height="544" poster="media/det_frames_poster.webp?v=ef4b4c31" preload="none" muted loop playsinline controls
                  data-narrow="media/det_frames_narrow" data-narrow-size="962x954"
-                 aria-label="Animation, simulated: two range-Doppler maps per frame, one with the drone and one with the same noise but no drone, next to two grids of squares that fill in red frame by frame: hits at the drone on the left, false alarms on the right.">
+                 aria-label="Animation, simulated: two range-Doppler maps per frame, one with a drone hovering at 15 m and one with the same noise but no drone, next to two grids of squares that fill in red frame by frame: hits at the drone on the left, false alarms on the right.">
             <source src="media/det_frames.webm?v=4a773382" type="video/webm">
             <source src="media/det_frames.mp4?v=f8ae943b" type="video/mp4">
           </video>
           <div class="clip-bar"><span class="clip-badge">100 frames</span></div>
         </div>
-          <figcaption class="tile-cap"><span class="tile-label">Detection</span> 100 frames with and without the drone.</figcaption>
+          <figcaption class="tile-cap"><span class="tile-label">Detection</span> A drone hovering at 15 m: 100 frames with and without it.</figcaption>
         </figure>
       </div>
     </section>
@@ -141,11 +141,11 @@
       <div class="mosaic">
         <figure class="tile tile-full">
           <a class="frame" href="images/00_overview.png?v=7dbac818" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/00_overview_narrow.png?v=1e9cfcc0" width="900" height="1390"><img src="images/00_overview.png?v=7dbac818" width="1600" height="530" loading="lazy" decoding="async" alt="Three panels. First, a rendered outdoor scene: a blue marker labelled drone hovers in the sky on the left, a pink marker labelled radio sits just above the grey ground on the right, a dashed line of sight joins them, and an inset shows the quadcopter model. Second, a range-Doppler heat map in which the drone appears as bright horizontal bands at short range. Third, a spectrogram of Doppler over time with many evenly spaced horizontal lines above and below zero."></picture></a>
-          <figcaption class="tile-cap"><span class="tile-label">Overview</span> Scene, range-Doppler map, blade-flash lines.</figcaption>
+          <figcaption class="tile-cap"><span class="tile-label">Overview</span> A hovering drone: scene, range-Doppler map, blade-flash lines.</figcaption>
         </figure>
         <figure class="tile tile-half">
           <a class="frame" href="images/02_range_doppler.png?v=c7e99589" title="Open the full-size image"><picture><img src="images/02_range_doppler.png?v=c7e99589" width="1000" height="760" loading="lazy" decoding="async" alt="Range-Doppler heat map with range on the horizontal axis and Doppler on the vertical axis. Bright horizontal bands, strongest just above zero Doppler, fill a stretch of short ranges where the drone is; farther ranges are dark."></picture></a>
-          <figcaption class="tile-cap"><span class="tile-label">Range-Doppler</span> The drone at its range, spread in Doppler by the blades.</figcaption>
+          <figcaption class="tile-cap"><span class="tile-label">Range-Doppler</span> A hovering drone at its range, spread in Doppler by the blades.</figcaption>
         </figure>
         <figure class="tile tile-half">
           <a class="frame" href="images/03_micro_doppler.png?v=a3e908d6" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/03_micro_doppler_narrow.png?v=c321d633" width="900" height="1160"><img src="images/03_micro_doppler.png?v=a3e908d6" width="1600" height="1040" loading="lazy" decoding="async" alt="Two stacked spectrograms of Doppler frequency versus time, one with the ground and one in open sky. Both show many evenly spaced horizontal lines above and below a dark band at zero Doppler, and the two panels look nearly the same. A right-hand axis numbers the lines as blade-flash harmonics."></picture></a>
@@ -245,7 +245,7 @@
         </figure>
         <figure class="tile tile-full">
           <a class="frame" href="images/42_detect_launch.webp?v=b8f1e15d" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/42_detect_launch_narrow.webp?v=f3ff915e" width="932" height="1168"><img src="images/42_detect_launch.webp?v=b8f1e15d" width="1809" height="584" loading="lazy" decoding="async" alt="Four range-Doppler maps with a colour bar of power over noise. Two geometries, drone seen from 15 degrees above and from 45 degrees below, each run with a full-sphere and a targeted launch. A red cross marks the detection, at the drone's range for both launches."></picture></a>
-          <figcaption class="tile-cap"><span class="tile-label">Detection</span> Both launches detect the drone in the same range cell.</figcaption>
+          <figcaption class="tile-cap"><span class="tile-label">Detection</span> Both launches detect the hovering drone in the same range cell.</figcaption>
         </figure>
       </div>
     </section>
