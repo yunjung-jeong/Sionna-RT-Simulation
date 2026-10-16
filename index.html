@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Drone ISAC Digital Twin · Yunjung Jeong</title>
-  <meta name="description" content="Ongoing research: a ray-traced digital twin for sensing drones with communication signals. Tracking clips, blade-flash signatures, city scenes and long range, all simulated.">
+  <meta name="description" content="Ongoing research: a ray-traced digital twin for sensing drones with communication signals. A refined drone model, tracking clips, blade-flash signatures, city scenes and long range, all simulated.">
   <meta name="author" content="Yunjung Jeong">
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#FBFAF6" media="(prefers-color-scheme: light)">
@@ -93,6 +93,7 @@
     <nav class="toc" aria-label="On this page">
       <ol>
         <li><a href="#about"><span class="toc-label">About</span><span class="leader" aria-hidden="true"></span></a></li>
+        <li><a href="#model"><span class="toc-label">Model</span><span class="leader" aria-hidden="true"></span></a></li>
         <li><a href="#motion"><span class="toc-label">In motion</span><span class="leader" aria-hidden="true"></span></a></li>
         <li><a href="#signatures"><span class="toc-label">Signatures</span><span class="leader" aria-hidden="true"></span></a></li>
         <li><a href="#places"><span class="toc-label">Places</span><span class="leader" aria-hidden="true"></span></a></li>
@@ -104,6 +105,58 @@
     <section id="about" class="section" aria-labelledby="about-title">
       <h2 id="about-title">About</h2>
       <p class="lede">Can one communication radio, listening to the echoes of its own 5G-like signal, detect a drone and read its spinning blades? A ray-traced <em>digital twin</em> built with NVIDIA Sionna RT.</p>
+      <div class="mosaic">
+        <figure class="tile tile-full">
+          <div class="clip" data-clip>
+          <video id="clip-rays" class="clip-video" width="1600" height="900" style="aspect-ratio: 1600 / 900" poster="media/twin_rays_poster.webp?v=4ba4e9e1" preload="none" muted loop playsinline controls
+                 data-narrow="media/twin_rays_narrow" data-narrow-size="960x540"
+                 aria-label="Animation, simulated: a quadcopter model hovers with its rotors turning. Thin orange lines, rays aimed at it from a radio out of view to the lower right, end in small dots where each ray first meets the body, an arm or a blade, and short yellow strokes show each ray bouncing off. As the blades turn, the dots on them move.">
+            <source src="media/twin_rays.webm?v=008359a2" type="video/webm">
+            <source src="media/twin_rays.mp4?v=f46936a5" type="video/mp4">
+          </video>
+          <div class="clip-bar"><span class="clip-badge">Ray tracing</span></div>
+        </div>
+          <figcaption class="tile-cap"><span class="tile-label">How it works</span> Rays from the radio meet the body and the turning blades, then bounce off.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="model" class="section" aria-labelledby="model-title">
+      <h2 id="model-title">Model</h2>
+      <div class="mosaic">
+        <figure class="tile tile-full">
+          <div class="clip" data-clip>
+          <video id="clip-turntable" class="clip-video" width="1600" height="900" style="aspect-ratio: 1600 / 900" poster="media/model_turntable_poster.webp?v=48854414" preload="none" muted loop playsinline controls
+                 data-narrow="media/model_turntable_narrow" data-narrow-size="960x540"
+                 aria-label="Animation, simulated scene render: the refined quadcopter model seen from all sides as the view circles once around it, its four two-blade rotors turning slowly; light grey shell and arms, dark motors and camera, teal blades.">
+            <source src="media/model_turntable.webm?v=b027fac8" type="video/webm">
+            <source src="media/model_turntable.mp4?v=afc0a6ce" type="video/mp4">
+          </video>
+          <div class="clip-bar"><span class="clip-badge">Turntable</span></div>
+        </div>
+          <figcaption class="tile-cap"><span class="tile-label">Refined model</span> A commercial quadcopter model, refined and frozen for all new runs. Rotor spin slowed for display.</figcaption>
+        </figure>
+        <figure class="tile tile-full">
+          <a class="frame" href="images/60_model_update.webp?v=5a42e50c" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/60_model_update_narrow.webp?v=4bf41ea3" width="900" height="880"><img src="images/60_model_update.webp?v=5a42e50c" width="1600" height="379" loading="lazy" decoding="async" alt="Two renders of the same quadcopter from the same angle. Left, the earlier model: a smooth, rounded shell and simple blades. Right, the refined model: a detailed shell around the nose and camera mount, and slimmer, twisted blades."></picture></a>
+          <figcaption class="tile-cap"><span class="tile-label">Update</span> Rotors on their own tilted motor axes, twisted and cambered blades, a detailed shell.</figcaption>
+        </figure>
+        <figure class="tile tile-half">
+          <div class="clip" data-clip>
+          <video id="clip-rotor" class="clip-video" width="1000" height="1000" style="aspect-ratio: 1000 / 1000" poster="media/model_rotor_poster.webp?v=895f451c" preload="none" muted loop playsinline controls
+                 data-narrow="media/model_rotor_narrow" data-narrow-size="720x720"
+                 aria-label="Animation, simulated scene render: close-up of one front rotor turning on its motor at the end of an arm, with the shell behind it; the teal blade shows its twist as it sweeps past.">
+            <source src="media/model_rotor.webm?v=2c3f8e78" type="video/webm">
+            <source src="media/model_rotor.mp4?v=42f8bbae" type="video/mp4">
+          </video>
+          <div class="clip-bar"><span class="clip-badge">Close-up</span></div>
+        </div>
+          <figcaption class="tile-cap"><span class="tile-label">Rotor</span> A twisted, cambered blade on its tilted motor axis.</figcaption>
+        </figure>
+        <figure class="tile tile-half">
+          <a class="frame" href="images/61_model_cutaway.webp?v=f249dbda" title="Open the full-size image"><picture><img src="images/61_model_cutaway.webp?v=f249dbda" width="1000" height="837" loading="lazy" decoding="async" alt="Render of the refined model from above at the front right, with the right half of the shell removed and the blades hidden: an orange battery, a blue main board on top of it, a yellow inner metal cover beneath and a small light-blue antenna plate in the top turret. A legend names the four parts."></picture></a>
+          <figcaption class="tile-cap"><span class="tile-label">Inside</span> Battery, boards and a metal cover inside the shell.</figcaption>
+        </figure>
+      </div>
     </section>
 
     <section id="motion" class="section" aria-labelledby="motion-title">
@@ -253,7 +306,7 @@
     <section id="status" class="section" aria-labelledby="status-title">
       <h2 id="status-title">Status</h2>
       <div class="note standfirst">
-        <p>Ongoing, unpublished research. All results are simulated with an idealised radio front end; a field test is planned. City scenes are NVIDIA Sionna RT built-ins.</p>
+        <p>Ongoing, unpublished research. All results are simulated with an idealised radio front end. The drone model has been refined and frozen, and a small field measurement is being prepared. City scenes are NVIDIA Sionna RT built-ins.</p>
       </div>
     </section>
 
