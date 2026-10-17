@@ -218,6 +218,29 @@
     <section id="places" class="section" aria-labelledby="places-title">
       <h2 id="places-title">Places</h2>
       <div class="mosaic">
+        <figure class="tile tile-full">
+          <div class="clip" data-clip>
+          <video id="clip-campus" class="clip-video" width="1280" height="800" style="aspect-ratio: 1280 / 800" poster="media/campus_flyover_poster.webp?v=1ede5fdb" preload="none" muted loop playsinline controls
+                 data-narrow="media/campus_flyover_narrow" data-narrow-size="800x500"
+                 aria-label="Animation, simulated scene render: a slow circling view over a university campus model on hilly green terrain, with pale box-shaped buildings around a ring road, grey roads and parking areas, thin brown walls and a village at the lower edge.">
+            <source src="media/campus_flyover.webm?v=3b273fcd" type="video/webm">
+            <source src="media/campus_flyover.mp4?v=fc326fc1" type="video/mp4">
+          </video>
+          <div class="clip-bar"><span class="clip-badge">Fly-over</span></div>
+        </div>
+          <figcaption class="tile-cap"><span class="tile-label">Our campus</span> DGIST, rebuilt as a ray-traceable scene.</figcaption>
+        </figure>
+        <figure class="tile tile-half">
+          <a class="frame" href="images/70_dgist_campus.webp?v=6fe8d96b" title="Open the full-size image"><picture><img src="images/70_dgist_campus.webp?v=6fe8d96b" width="1600" height="1000" loading="lazy" decoding="async" alt="Oblique render of the campus scene under a pale sky: pale box-shaped buildings inside a ring road, grey roads, thin brown walls and green bare-earth terrain rising to hills, with a dense village in the foreground."></picture></a>
+          <figcaption class="tile-cap"><span class="tile-label">How it is built</span> Public national map data give building footprints and heights, roads, walls and bare-earth terrain; each gets a radio material.</figcaption>
+        </figure>
+        <figure class="tile tile-half">
+          <a class="frame" href="images/71_dgist_district.webp?v=32e9ac4d" title="Open the full-size image"><picture><img src="images/71_dgist_district.webp?v=32e9ac4d" width="1600" height="1000" loading="lazy" decoding="async" alt="Oblique render of the wider district scene: rows of tall apartment towers and a curved road ring in the middle, an old town with small buildings on the left, large flat industrial halls along a road grid in the foreground, flat fields and hills behind."></picture></a>
+          <figcaption class="tile-cap"><span class="tile-label">District</span> The surrounding district: apartment towers, old town and industrial zone.</figcaption>
+        </figure>
+        <p class="tile-cap" style="grid-column: 1 / -1; font-size: var(--fs-label); color: var(--ink-muted);">Building data: MOLIT GIS Building Integrated Information (VWorld); NGII 1:5,000 digital topographic map; terrain comparison: Copernicus DEM GLO-30.</p>
+      </div>
+      <div class="mosaic">
         <figure class="tile tile-third">
           <a class="frame frame-dark" href="images/31_scene_etoile.webp?v=e7016313" title="Open the full-size image"><img src="images/31_scene_etoile.webp?v=e7016313" width="900" height="600" loading="lazy" decoding="async" alt="Rendered city model seen from above at an angle: blocks of buildings radiating around a large circular plaza (Paris, Étoile)."></a>
           <figcaption class="tile-cap"><span class="tile-label">City</span> Paris, Étoile</figcaption>
@@ -306,7 +329,7 @@
     <section id="status" class="section" aria-labelledby="status-title">
       <h2 id="status-title">Status</h2>
       <div class="note standfirst">
-        <p>Ongoing, unpublished research. All results are simulated with an idealised radio front end. The drone model has been refined and frozen, and a small field measurement is being prepared. City scenes are NVIDIA Sionna RT built-ins.</p>
+        <p>Ongoing, unpublished research. All results are simulated with an idealised radio front end. The drone model has been refined and frozen, and a small field measurement is being prepared. The campus and district scenes are our own; the other city scenes are NVIDIA Sionna RT built-ins.</p>
       </div>
     </section>
 
