@@ -83,8 +83,8 @@
       </figure>
 
       <ul class="stats" aria-label="The twin in numbers (all from simulation)">
-        <li><span class="stat-num">~40<span class="stat-unit">×</span></span><span class="stat-label">faster with targeted ray launching</span></li>
-        <li><span class="stat-num">1<span class="stat-unit">km</span></span><span class="stat-label">simulated range, open sky</span></li>
+        <li><span class="stat-num">~40<span class="stat-unit">×</span></span><span class="stat-label">faster with targeted ray launching (best tested case)</span></li>
+        <li><span class="stat-num">1<span class="stat-unit">km</span></span><span class="stat-label">range-scaling test, open sky</span></li>
         <li><span class="stat-num">10</span><span class="stat-label">airframe models</span></li>
         <li><span class="stat-num">11</span><span class="stat-label">simulated surroundings</span></li>
       </ul>
@@ -134,7 +134,7 @@
           </video>
           <div class="clip-bar"><span class="clip-badge">Turntable</span></div>
         </div>
-          <figcaption class="tile-cap"><span class="tile-label">Refined model</span> A commercial quadcopter model, refined and frozen for all new runs. Rotor spin slowed for display.</figcaption>
+          <figcaption class="tile-cap"><span class="tile-label">Refined model</span> A commercial quadcopter model, refined and frozen for all new runs; the earlier figures on this page were made with the previous version of the model. Rotor spin slowed for display.</figcaption>
         </figure>
         <figure class="tile tile-full">
           <a class="frame" href="images/60_model_update.webp?v=5a42e50c" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/60_model_update_narrow.webp?v=4bf41ea3" width="900" height="880"><img src="images/60_model_update.webp?v=5a42e50c" width="1600" height="379" loading="lazy" decoding="async" alt="Two renders of the same quadcopter from the same angle. Left, the earlier model: a smooth, rounded shell and simple blades. Right, the refined model: a detailed shell around the nose and camera mount, and slimmer, twisted blades."></picture></a>
@@ -236,7 +236,7 @@
         </figure>
         <figure class="tile tile-half">
           <a class="frame" href="images/70_dgist_campus.webp?v=64d8b7c2" title="Open the full-size image"><picture><img src="images/70_dgist_campus.webp?v=64d8b7c2" width="1600" height="1000" loading="lazy" decoding="async" alt="Oblique render of the campus scene under a pale sky: pale box-shaped buildings inside a ring road, grey roads and thin brown walls; the ground is coloured by material, with green forest floor covering the hills, pale yellow dry ground, light grey built ground around the buildings, a small blue pond and a dense village in the foreground."></picture></a>
-          <figcaption class="tile-cap"><span class="tile-label">How it is built</span> Public national map data give building footprints and heights, roads, walls and bare-earth terrain; the ground now carries radio materials from a land-cover map.</figcaption>
+          <figcaption class="tile-cap"><span class="tile-label">How it is built</span> Public national map data give building footprints, roads, walls and bare-earth terrain; building heights are taken from the registers where listed and estimated from storey counts elsewhere; the ground carries radio materials assigned by land-cover class. A candidate scene, still being refined.</figcaption>
         </figure>
         <figure class="tile tile-half">
           <a class="frame" href="images/71_dgist_district.webp?v=2751ba06" title="Open the full-size image"><picture><img src="images/71_dgist_district.webp?v=2751ba06" width="1600" height="1000" loading="lazy" decoding="async" alt="Oblique render of the wider district scene: rows of tall apartment towers and a curved road ring in the middle, an old town on the left and large industrial halls in the foreground; the ground is coloured by material, with pale green-grey rice paddies in the lower left, green forest on the hills, a blue river and ponds, and pale yellow dry ground between the buildings."></picture></a>
@@ -300,11 +300,11 @@
       <div class="mosaic">
         <figure class="tile tile-full">
           <a class="frame" href="images/20_stft_grid.png?v=4b81e73c" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/20_stft_grid_narrow.png?v=a69b25db" width="900" height="1760"><img src="images/20_stft_grid.png?v=4b81e73c" width="1600" height="890" loading="lazy" decoding="async" alt="Eight spectrograms of Doppler versus time, all with the constant echo removed, with thin dashed blade-tip lines. First group, radio well below the drone: free space, ground only, buildings only, our outdoor scene and the NVIDIA street canyon all show nearly the same evenly spaced blade flashes inside the dashed lines. Second group, the second scene: the lowest parapet and the parapet show clean repeating flashes on both sides of zero, and the wall edge, which hides half of the drone, shows a visibly different, uneven pattern."></picture></a>
-          <figcaption class="tile-cap"><span class="tile-label">Eight signatures</span> Still surroundings change little; hiding half the drone changes a lot.</figcaption>
+          <figcaption class="tile-cap"><span class="tile-label">Eight signatures</span> In these scenes, with the constant echo removed, still surroundings change the rotor signature little; hiding half the drone changes a lot.</figcaption>
         </figure>
         <figure class="tile tile-full">
           <a class="frame" href="images/50_wind_rd.webp?v=5c0c8000" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/50_wind_rd_narrow.webp?v=2208adb5" width="1077" height="1160"><img src="images/50_wind_rd.webp?v=5c0c8000" width="1957" height="580" loading="lazy" decoding="async" alt="Four range-Doppler maps; the drone sits at about 15 metres. Calm: faint bands at the drone's range. Wind 10 metres per second with clutter in the drone's range cell: a bright band hugging zero Doppler at short ranges. Wind with clutter at all ranges: the band stretches along the whole range axis. At 5.8 gigahertz: a similar band on a wider Doppler axis."></picture></a>
-          <figcaption class="tile-cap"><span class="tile-label">Wind</span> Wind-blown vegetation smears clutter near zero Doppler.</figcaption>
+          <figcaption class="tile-cap"><span class="tile-label">Wind</span> Slowly moving simulated vegetation leaves a clutter band near zero Doppler after the constant echo is removed.</figcaption>
         </figure>
       </div>
     </section>
@@ -314,11 +314,11 @@
       <div class="mosaic">
         <figure class="tile tile-full">
           <a class="frame" href="images/30_launch_compare.webp?v=92af53f1" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/30_launch_compare_narrow.webp?v=2f62bd6b" width="900" height="1500"><img src="images/30_launch_compare.webp?v=92af53f1" width="1600" height="820" loading="lazy" decoding="async" alt="Four spectrograms of Doppler versus time and a line plot. Top row: full-sphere launch with two random seeds; bottom row: targeted launch with two random seeds. All four show the same evenly spaced blade-flash lines between dashed blade-tip lines. The line plot overlays the time-averaged Doppler spectra: seven grey full-sphere curves and two teal targeted curves that follow the same envelope."></picture></a>
-          <figcaption class="tile-cap"><span class="tile-label">Targeted launch</span> Same echo level and Doppler spread as a full-sphere launch, up to ~40× faster.</figcaption>
+          <figcaption class="tile-cap"><span class="tile-label">Targeted launch</span> Same Doppler spread as a full-sphere launch, and the same echo level in most of the tested open-sky cases; up to ~40× faster in the best tested case.</figcaption>
         </figure>
         <figure class="tile tile-half">
           <a class="frame" href="images/34_long_range.webp?v=1f5017ad" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/34_long_range_narrow.webp?v=86192883" width="900" height="1000"><img src="images/34_long_range.webp?v=1f5017ad" width="1000" height="760" loading="lazy" decoding="async" alt="Line plot of echo level versus range on a logarithmic axis from 15 metres to 1 kilometre in open sky. Dots for the mean of several simulation runs lie on a dashed radar-equation line falling as range to the minus fourth power; a strip below shows single-run deviations within about plus or minus one decibel."></picture></a>
-          <figcaption class="tile-cap"><span class="tile-label">Long range</span> Up to 1&nbsp;km in open sky, on the radar-equation trend.</figcaption>
+          <figcaption class="tile-cap"><span class="tile-label">Long range</span> A range-scaling test to 1&nbsp;km in open sky: the mean echo follows the radar-equation trend (not a measured detection range).</figcaption>
         </figure>
         <figure class="tile tile-half">
           <a class="frame" href="images/32_range_stft.webp?v=06a3a0e1" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/32_range_stft_narrow.webp?v=bf8564a6" width="900" height="1400"><img src="images/32_range_stft.webp?v=06a3a0e1" width="1600" height="520" loading="lazy" decoding="async" alt="Three spectrograms of Doppler versus time for the same hovering drone in open sky at 15, 42 and 85 metres, each showing evenly spaced blade-flash lines between dashed blade-tip lines; the pattern looks much the same at every range."></picture></a>
@@ -334,7 +334,7 @@
     <section id="status" class="section" aria-labelledby="status-title">
       <h2 id="status-title">Status</h2>
       <div class="note standfirst">
-        <p>Ongoing, unpublished research. All results are simulated with an idealised radio front end. The drone model has been refined and frozen, and a small field measurement is being prepared. The campus and district scenes are our own; the other city scenes are NVIDIA Sionna RT built-ins.</p>
+        <p>Ongoing, unpublished research. All results are simulated with an idealised radio front end; absolute echo levels depend on the simulation's sampling conventions and have not been calibrated against measurements. The drone model has been refined and frozen, and a small field measurement is being prepared; figures made before the refinement are kept as earlier demonstrations. The campus and district scenes are our own; the other city scenes are NVIDIA Sionna RT built-ins.</p>
       </div>
     </section>
 
