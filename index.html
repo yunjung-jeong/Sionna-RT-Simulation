@@ -14,13 +14,13 @@
   <meta property="og:title" content="Sensing Drones with Communication Signals">
   <meta property="og:description" content="Ongoing research by Yunjung Jeong: a ray-traced digital twin of how one radio could detect, track and characterise a drone and its spinning blades. All results shown are simulated.">
   <meta property="og:url" content="https://yunjung-jeong.github.io/Sionna-RT-Simulation/">
-  <meta property="og:image" content="https://yunjung-jeong.github.io/Sionna-RT-Simulation/images/00_overview.png?v=7dbac818">
+  <meta property="og:image" content="https://yunjung-jeong.github.io/Sionna-RT-Simulation/images/00_overview.png?v=7ebe918d">
   <meta property="og:image:width" content="1600">
   <meta property="og:image:height" content="530">
   <meta property="og:image:alt" content="Simulated scene of a drone and a radio, the range-Doppler map of the drone's echo, and a micro-Doppler spectrogram with evenly spaced blade-flash lines.">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="assets/favicon.svg?v=50c4dee9" type="image/svg+xml">
-  <link rel="preload" as="image" href="media/trk_crossing_poster.webp?v=aaa4f7b5" type="image/webp">
+  <link rel="preload" as="image" href="media/trk_crossing_poster.webp?v=50ee6b95" type="image/webp">
   <link rel="stylesheet" href="assets/offprint.css?v=d53d60d9">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,6 +32,7 @@
   <script>document.documentElement.classList.add('js');</script>
   <script src="assets/contents.js?v=23c5772c" defer></script>
   <script src="assets/page.js?v=d9d66787" defer></script>
+<!-- refresh 2026-10-21: latest model, 78 MHz / 100 ms waveform -->
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -71,11 +72,11 @@
           <span class="stage-label">One radio tracking a drone, frame by frame</span>
         </div>
         <div class="clip clip-hero" data-clip>
-          <video id="clip-crossing" class="clip-video" width="1600" height="544" poster="media/trk_crossing_poster.webp?v=aaa4f7b5" preload="none" muted loop playsinline controls
+          <video id="clip-crossing" class="clip-video" width="1600" height="544" poster="media/trk_crossing_poster.webp?v=50ee6b95" preload="none" muted loop playsinline controls
                  data-narrow="media/trk_crossing_narrow" data-narrow-size="1010x1010"
                  aria-label="Animation, simulated: a range-Doppler map frame by frame with detections and a tracker gate, next to a side view of the drone crossing in front of the radio and a range-versus-time strip where the track follows the true range.">
-            <source src="media/trk_crossing.webm?v=00f2188d" type="video/webm">
-            <source src="media/trk_crossing.mp4?v=fc4f4155" type="video/mp4">
+            <source src="media/trk_crossing.webm?v=26281df1" type="video/webm">
+            <source src="media/trk_crossing.mp4?v=8fcaf336" type="video/mp4">
           </video>
           <div class="clip-bar"><span class="clip-badge">8 m/s crossing</span></div>
         </div>
@@ -134,7 +135,7 @@
           </video>
           <div class="clip-bar"><span class="clip-badge">Turntable</span></div>
         </div>
-          <figcaption class="tile-cap"><span class="tile-label">Refined model</span> A commercial quadcopter model, refined and frozen for all new runs; the earlier figures on this page were made with the previous version of the model. Rotor spin slowed for display.</figcaption>
+          <figcaption class="tile-cap"><span class="tile-label">Refined model</span> A commercial quadcopter model, refined and frozen for all new runs; the detection, tracking and signature figures on this page use it, with a wider waveform and a longer observation window than before. Rotor spin slowed for display.</figcaption>
         </figure>
         <figure class="tile tile-full">
           <a class="frame" href="images/60_model_update.webp?v=5a42e50c" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/60_model_update_narrow.webp?v=4bf41ea3" width="900" height="880"><img src="images/60_model_update.webp?v=5a42e50c" width="1600" height="379" loading="lazy" decoding="async" alt="Two renders of the same quadcopter from the same angle. Left, the earlier model: a smooth, rounded shell and simple blades. Right, the refined model: a detailed shell around the nose and camera mount, and slimmer, twisted blades."></picture></a>
@@ -168,11 +169,11 @@
       <div class="mosaic">
         <figure class="tile tile-full">
           <div class="clip" data-clip>
-          <video id="clip-flyin" class="clip-video" width="1600" height="544" poster="media/trk_flyin_poster.webp?v=1ee3378e" preload="none" muted loop playsinline controls
+          <video id="clip-flyin" class="clip-video" width="1600" height="544" poster="media/trk_flyin_poster.webp?v=564adf5d" preload="none" muted loop playsinline controls
                  data-narrow="media/trk_flyin_narrow" data-narrow-size="1010x1010"
                  aria-label="Animation, simulated: range-Doppler map frames with detections and a tracker gate as a drone flies straight toward the radio from about 50 m to 11 m, next to a side view and a range-versus-time strip where the track follows the falling true range.">
-            <source src="media/trk_flyin.webm?v=ba727bf8" type="video/webm">
-            <source src="media/trk_flyin.mp4?v=6bfb40b7" type="video/mp4">
+            <source src="media/trk_flyin.webm?v=1c909da2" type="video/webm">
+            <source src="media/trk_flyin.mp4?v=2c8ac0dd" type="video/mp4">
           </video>
           <div class="clip-bar"><span class="clip-badge">8 m/s fly-in</span></div>
         </div>
@@ -180,11 +181,11 @@
         </figure>
         <figure class="tile tile-full">
           <div class="clip" data-clip>
-          <video id="clip-detect" class="clip-video" width="1600" height="544" poster="media/det_frames_poster.webp?v=ef4b4c31" preload="none" muted loop playsinline controls
+          <video id="clip-detect" class="clip-video" width="1600" height="544" poster="media/det_frames_poster.webp?v=82102c8a" preload="none" muted loop playsinline controls
                  data-narrow="media/det_frames_narrow" data-narrow-size="962x954"
                  aria-label="Animation, simulated: two range-Doppler maps per frame, one with a drone hovering at 15 m and one with the same noise but no drone, next to two grids of squares that fill in red frame by frame: hits at the drone on the left, false alarms on the right.">
-            <source src="media/det_frames.webm?v=4a773382" type="video/webm">
-            <source src="media/det_frames.mp4?v=f8ae943b" type="video/mp4">
+            <source src="media/det_frames.webm?v=6ad58f56" type="video/webm">
+            <source src="media/det_frames.mp4?v=75e7cdb3" type="video/mp4">
           </video>
           <div class="clip-bar"><span class="clip-badge">100 frames</span></div>
         </div>
@@ -197,16 +198,16 @@
       <h2 id="signatures-title">Signatures</h2>
       <div class="mosaic">
         <figure class="tile tile-full">
-          <a class="frame" href="images/00_overview.png?v=7dbac818" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/00_overview_narrow.png?v=1e9cfcc0" width="900" height="1390"><img src="images/00_overview.png?v=7dbac818" width="1600" height="530" loading="lazy" decoding="async" alt="Three panels. First, a rendered outdoor scene: a blue marker labelled drone hovers in the sky on the left, a pink marker labelled radio sits just above the grey ground on the right, a dashed line of sight joins them, and an inset shows the quadcopter model. Second, a range-Doppler heat map in which the drone appears as bright horizontal bands at short range. Third, a spectrogram of Doppler over time with many evenly spaced horizontal lines above and below zero."></picture></a>
+          <a class="frame" href="images/00_overview.png?v=7ebe918d" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/00_overview_narrow.png?v=bf89aaa7" width="900" height="1390"><img src="images/00_overview.png?v=7ebe918d" width="1600" height="530" loading="lazy" decoding="async" alt="Three panels. First, a rendered outdoor scene: a blue marker labelled drone hovers in the sky on the left, a pink marker labelled radio sits just above the grey ground on the right, a dashed line of sight joins them, and an inset shows the quadcopter model. Second, a range-Doppler heat map in which the drone appears as bright horizontal bands at short range. Third, a spectrogram of Doppler over time with many evenly spaced horizontal lines above and below zero."></picture></a>
           <figcaption class="tile-cap"><span class="tile-label">Overview</span> A hovering drone: scene, range-Doppler map, blade-flash lines.</figcaption>
         </figure>
         <figure class="tile tile-half">
-          <a class="frame" href="images/02_range_doppler.png?v=c7e99589" title="Open the full-size image"><picture><img src="images/02_range_doppler.png?v=c7e99589" width="1000" height="760" loading="lazy" decoding="async" alt="Range-Doppler heat map with range on the horizontal axis and Doppler on the vertical axis. Bright horizontal bands, strongest just above zero Doppler, fill a stretch of short ranges where the drone is; farther ranges are dark."></picture></a>
+          <a class="frame" href="images/02_range_doppler.png?v=a7e4ce1e" title="Open the full-size image"><picture><img src="images/02_range_doppler.png?v=a7e4ce1e" width="1000" height="760" loading="lazy" decoding="async" alt="Range-Doppler heat map with range on the horizontal axis and Doppler on the vertical axis. A narrow column of evenly spaced bright dashes at the drone's range, strongest near zero Doppler, fades toward the top and bottom; everything else is dark."></picture></a>
           <figcaption class="tile-cap"><span class="tile-label">Range-Doppler</span> A hovering drone at its range, spread in Doppler by the blades.</figcaption>
         </figure>
         <figure class="tile tile-half">
-          <a class="frame" href="images/03_micro_doppler.png?v=a3e908d6" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/03_micro_doppler_narrow.png?v=c321d633" width="900" height="1160"><img src="images/03_micro_doppler.png?v=a3e908d6" width="1600" height="1040" loading="lazy" decoding="async" alt="Two stacked spectrograms of Doppler frequency versus time, one with the ground and one in open sky. Both show many evenly spaced horizontal lines above and below a dark band at zero Doppler, and the two panels look nearly the same. A right-hand axis numbers the lines as blade-flash harmonics."></picture></a>
-          <figcaption class="tile-cap"><span class="tile-label">Micro-Doppler</span> Blade-flash lines, with and without the ground.</figcaption>
+          <a class="frame" href="images/03_micro_doppler.png?v=2aff27df" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/03_micro_doppler_narrow.png?v=fc41edc2" width="900" height="1160"><img src="images/03_micro_doppler.png?v=2aff27df" width="1600" height="1040" loading="lazy" decoding="async" alt="Two stacked Doppler spectra at the drone's range, one with the ground and one in open sky: a comb of evenly spaced narrow peaks on both sides of zero Doppler, strongest near the centre, and the two panels look nearly the same."></picture></a>
+          <figcaption class="tile-cap"><span class="tile-label">Micro-Doppler</span> Blade-flash lines in one observation window, with and without the ground.</figcaption>
         </figure>
         <figure class="tile tile-full">
           <a class="frame" href="images/33_blade_lines.webp?v=6345604c" title="Open the full-size image"><picture><source media="(max-width: 56rem)" srcset="images/33_blade_lines_narrow.webp?v=47336c19" width="900" height="1500"><img src="images/33_blade_lines.webp?v=6345604c" width="1600" height="900" loading="lazy" decoding="async" alt="Top: a spectrogram of Doppler versus time over a 0.69 second hover, showing many evenly spaced horizontal blade-flash lines between two dashed blade-tip lines. Bottom left: a fine Doppler spectrum where four overlaid seeds show a comb of sharp lines, with the region beyond the blade-tip Doppler shaded. Bottom right: a zoom from minus 600 to plus 600 hertz showing smooth, sharp lines about 125 hertz apart."></picture></a>
